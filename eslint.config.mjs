@@ -17,7 +17,17 @@ const eslintConfig = defineConfig([
       'tailwindcss/classnames-order': 'off',
     },
   },
-  globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts']),
+  globalIgnores([
+    '.next/**',
+    'out/**',
+    'build/**',
+    'next-env.d.ts',
+    'node_modules/**',
+    'public/**',
+    '*.tsbuildinfo',
+    '.env*',
+    'coverage/**',
+  ]),
 ]);
 
 export default eslintConfig;

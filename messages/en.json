@@ -1,5 +1,28 @@
 {
-  "HomePage": {
-    "title": "Hello world!"
+  "metadata": {
+    "yieldCalculator": {
+      "title": "Yield Calculator | Yield Cloud",
+      "description": "Calculate the capital you need to live off your investment returns. Set your target monthly income and find out how much you need in a bank or investment fund.",
+      "ogTitle": "Financial Independence & Capital Calculator | Yield Cloud",
+      "ogDescription": "How much capital do you need to live off your returns? Calculate the total amount required based on your monthly income target and expected APY."
+    },
+    "capitalCalculator": {
+      "title": "Capital Calculator | Yield Cloud",
+      "description": "What monthly income are you aiming for? Calculate the required capital and full return breakdown by duration and frequency.",
+      "ogTitle": "Monthly Income & Financial Freedom Calculator | Yield Cloud",
+      "ogDescription": "Set your target monthly income and calculate the capital required, with daily, monthly, and annual return breakdowns."
+    },
+    "goalCalculator": {
+      "title": "Financial Goal Planner | Yield Cloud",
+      "description": "When and how will you reach your financial goal? Set your target, current savings, and timeline — we calculate your smart savings and investment plan.",
+      "ogTitle": "Smart Savings & Investment Goal Planner | Yield Cloud",
+      "ogDescription": "Calculate the savings plan needed to hit your financial goal. Set your target amount, current balance, and timeframe — we handle the rest."
+    },
+    "about": {
+      "title": "About Us | Yield Cloud",
+      "description": "Yield Cloud is an independent Egyptian platform helping you make smarter investment decisions. We calculate returns, clarify your options, and stand by you on your path to financial freedom.",
+      "ogTitle": "About Us | Yield Cloud",
+      "ogDescription": "Learn about Yield Cloud — our vision, mission, and how we help Egyptians achieve financial freedom through transparent and accessible investment tools."
+    }
   }
 }
