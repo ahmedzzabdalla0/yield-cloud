@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" id="Layer_1" x="0px" y="0px" viewBox="0 0 40 40" style="enable-background:new 0 0 40 40;" xml:space="preserve" width="40" height="40"><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"><rdf:Description><dc:creator>RealFaviconGenerator</dc:creator><dc:source>https://realfavicongenerator.net</dc:source></rdf:Description></rdf:RDF></metadata><style type="text/css">
+	.st0{fill:url(#SVGID_1_);}
+	.st1{fill:#FFFFFF;fill-opacity:1.000000e-02;}
+	.st2{fill:none;stroke:#FFFFFF;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;}
+</style><linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="-1.788158e-07" y1="8" x2="40" y2="48" gradientTransform="matrix(1 0 0 -1 0 48)">
+	<stop offset="0" style="stop-color:#065F46"></stop>
+	<stop offset="1" style="stop-color:#059669"></stop>
+</linearGradient><path class="st0" d="M16,0h8c8.8,0,16,7.2,16,16v8c0,8.8-7.2,16-16,16h-8C7.2,40,0,32.8,0,24v-8C0,7.2,7.2,0,16,0z"></path><g>
+	<path shape-rendering="crispEdges" class="st1" d="M16,0h8c8.8,0,16,7.2,16,16v8c0,8.8-7.2,16-16,16h-8C7.2,40,0,32.8,0,24v-8
+		C0,7.2,7.2,0,16,0z"></path>
+</g><path class="st2" d="M25.5,27H17c-3.6,0-6.6-2.7-7-6.3c-0.3-3.6,2.1-6.9,5.6-7.5c3.5-0.7,7,1.4,8.1,4.9h1.8c2.5,0,4.5,2,4.5,4.5
+	S28,27,25.5,27L25.5,27"></path><path class="st2" d="M17,21l2,2l4-4"></path></svg>
