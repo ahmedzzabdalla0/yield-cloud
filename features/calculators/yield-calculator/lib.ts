@@ -16,7 +16,7 @@ export function decodeYieldFormValues(encoded: string): YieldFormValues | null {
     ) as Partial<YieldFormValues>;
 
     if (
-      typeof parsed.monthlyIncome !== 'number' ||
+      typeof parsed.principal !== 'number' ||
       typeof parsed.apy !== 'number' ||
       typeof parsed.periodCount !== 'number' ||
       typeof parsed.taxValue !== 'number' ||
@@ -32,43 +32,46 @@ export function decodeYieldFormValues(encoded: string): YieldFormValues | null {
   }
 }
 
-export function calcYield(values: YieldFormValues): YieldResult {
-  const { monthlyIncome, apy, period, periodCount, taxMode, taxValue } = values;
+export function calcYield(values: YieldFormValues): NonNullable<YieldResult> {
+  const { principal, apy, period, periodCount, taxMode, taxValue } = values;
 
-  const grossMonthly = monthlyIncome;
+  const dailyRate = apy / 100 / 12 / 30;
 
-  const taxDeduction =
-    taxMode === 'percentage' ? grossMonthly * (taxValue / 100) : taxValue;
-
-  const netMonthly = Math.max(0, grossMonthly + taxDeduction);
-
-  const netApy = apy / 100;
-
-  const principal = netApy > 0 ? (netMonthly * 12) / netApy : 0;
-
-  const grossPerYear = principal * netApy;
-  const grossPerMonth = grossPerYear / 12;
-  const grossPerDay = grossPerYear / 365;
-
-  const countMultiplier = Math.max(1, periodCount);
-
-  const periodUnitReturn: Record<string, number> = {
-    day: grossPerDay,
-    month: grossPerMonth,
-    year: grossPerYear,
+  const periodDays: Record<Period, number> = {
+    day: periodCount,
+    month: periodCount * 30,
+    year: periodCount * 365,
   };
 
+  const days = periodDays[period];
+
+  const grossReturn = principal * dailyRate * days;
+
+  const taxDeduction =
+    taxMode === 'percentage'
+      ? grossReturn * (taxValue / 100)
+      : Math.min(taxValue, grossReturn);
+
+  const netReturn = Math.max(0, grossReturn - taxDeduction);
+
+  const gainPercent = principal > 0 ? (netReturn / principal) * 100 : 0;
+
+  const perDay = principal * dailyRate;
+  const perMonth = perDay * 30;
+  const perYear = perDay * 365;
+
   return {
-    principal,
-    perDay: grossPerDay,
-    perMonth: grossPerMonth,
-    perYear: grossPerYear,
-    selectedPeriodReturn: periodUnitReturn[period] * countMultiplier,
+    grossReturn,
+    taxDeduction,
+    netReturn,
+    gainPercent,
+    perDay,
+    perMonth,
+    perYear,
     selectedPeriod: period,
   };
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function toIntlLocale(_locale: string): string {
   return 'en-US';
 }
@@ -77,4 +80,11 @@ export function formatCurrency(value: number, locale: string): string {
   return new Intl.NumberFormat(toIntlLocale(locale), {
     maximumFractionDigits: 0,
   }).format(Math.round(value));
+}
+
+export function formatPercent(value: number): string {
+  return new Intl.NumberFormat('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(value);
 }

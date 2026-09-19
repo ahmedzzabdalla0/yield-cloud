@@ -1,6 +1,6 @@
 'use client';
 
-import { Landmark, RefreshCw, Share2 } from 'lucide-react';
+import { RefreshCw, Share2, TrendingUp } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import { Badge } from '@/components/ui/bage';
@@ -13,8 +13,8 @@ import {
   ResultCardStat,
   ResultCardStats,
 } from '@/components/ui/result-card';
-import { formatCurrency } from './lib';
-import type { Period, YieldResult } from './types';
+import { formatCurrency, formatPercent } from './lib';
+import type { YieldResult } from './types';
 
 type YieldCalculatorResultProps = {
   result: YieldResult;
@@ -22,15 +22,6 @@ type YieldCalculatorResultProps = {
 };
 
 const PLACEHOLDER = '00.0';
-
-function periodReturnLabel(
-  period: Period,
-  t: ReturnType<typeof useTranslations>
-) {
-  if (period === 'day') return t('periodDay');
-  if (period === 'month') return t('periodMonth');
-  return t('periodYear');
-}
 
 export function YieldCalculatorResult({
   result,
@@ -49,46 +40,31 @@ export function YieldCalculatorResult({
     <ResultCard>
       <ResultCardHeader>
         <Badge variant="soft-brand" size="sm">
-          <Landmark />
+          <TrendingUp />
           {t('badge')}
         </Badge>
       </ResultCardHeader>
 
       <div className="flex flex-col gap-1">
-        <p className="text-body-sm text-muted-foreground">{t('hint')}</p>
+        <p className="text-body-sm text-muted-foreground">{t('returnLabel')}</p>
         <div className="flex flex-wrap items-baseline gap-1.5">
           <span
             className={`text-display-xl font-black${!result ? 'text-muted-foreground' : ''}`}
           >
-            {result ? formatCurrency(result.principal, locale) : PLACEHOLDER}
+            {result ? formatCurrency(result.netReturn, locale) : PLACEHOLDER}
           </span>
           <span className="text-body-md text-muted-foreground">
             {t('unit')}
           </span>
         </div>
-        <p className="text-body-sm text-muted-foreground">{t('disclaimer')}</p>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <div className="flex items-center justify-between">
-          <ResultCardEyebrow>{t('returnLabel')}</ResultCardEyebrow>
-          {result && (
-            <Badge variant="outline" size="sm">
-              {periodReturnLabel(result.selectedPeriod, t)}
-            </Badge>
-          )}
-        </div>
-
-        <div className="flex items-baseline gap-2">
+        <div className="flex items-center gap-1.5">
+          <ResultCardEyebrow>{t('gainLabel')}</ResultCardEyebrow>
           <span
-            className={`text-display-xl font-bold${result ? 'text-primary' : 'text-muted-foreground'}`}
+            className={`text-body-sm font-semibold${result ? 'text-primary' : 'text-muted-foreground'}`}
           >
             {result
-              ? formatCurrency(result.selectedPeriodReturn, locale)
-              : PLACEHOLDER}
-          </span>
-          <span className="text-body-md text-muted-foreground">
-            {t('unit')}
+              ? `${formatPercent(result.gainPercent)}%`
+              : `${PLACEHOLDER}%`}
           </span>
         </div>
       </div>

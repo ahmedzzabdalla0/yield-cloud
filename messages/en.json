@@ -11,55 +11,52 @@
   },
   "pages": {
     "yieldCalculator": {
-      "badge": "Financial Independence & Freedom Calculator",
-      "headline": "What monthly income do you want?",
-      "description": "Calculate the required capital and return details by duration and frequency — down to the last detail.",
+      "badge": "Investment Return Calculator",
+      "headline": "How much will you earn on your investment?",
+      "description": "Enter your capital, annual yield rate, and investment period — we calculate your gross and net return instantly.",
       "form": {
-        "sectionLabel": "Set your monthly goal",
-        "monthlyIncome": {
-          "label": "How much do you want to spend per month?",
-          "placeholder": "Target monthly income",
-          "suffix": "EGP / month"
+        "sectionLabel": "Enter investment details",
+        "principal": {
+          "label": "Principal amount",
+          "placeholder": "Amount you will invest",
+          "suffix": "EGP"
         },
         "apy": {
-          "label": "Expected average annual yield (APY %)",
-          "placeholder": "Enter percentage",
+          "label": "Annual yield rate (APY %)",
+          "placeholder": "Expected annual rate",
           "suffix": "%"
         },
         "period": {
-          "label": "Which period do you want to calculate returns for?",
-          "placeholder": "Number of periods",
+          "label": "Investment period",
+          "placeholder": "Count",
           "day": "Day",
           "month": "Month",
           "year": "Year"
         },
         "tax": {
-          "label": "Do you want to deduct tax from the return?",
-          "placeholder": "Tax amount",
+          "label": "Any tax deducted from returns?",
+          "placeholder": "Tax value",
           "modeAmount": "EGP",
-          "modePercentage": "Percentage",
-          "placeholderAmount": "0",
-          "placeholderPercentage": "0",
+          "modePercentage": "Percentage %",
           "noTax": "No tax"
         },
         "submit": "Calculate"
       },
       "result": {
-        "badge": "Required principal capital",
-        "hint": "You need to deposit this in a bank or fund.",
+        "badge": "Investment return",
+        "returnLabel": "You will earn after tax",
+        "gainLabel": "Gain on principal:",
         "unit": "Egyptian pounds",
-        "disclaimer": "Keep this amount untouched — don't withdraw the returns.",
-        "returnLabel": "Your return will be:",
-        "perDay": "Daily equivalent",
-        "perMonth": "Monthly equivalent",
-        "perYear": "Annual equivalent",
+        "currencyUnit": "EGP",
+        "perDay": "Per day",
+        "perMonth": "Per month",
+        "perYear": "Per year",
         "periodDay": "every 24 hours",
         "periodMonth": "every month",
         "periodYear": "every year",
         "reset": "Reset",
         "share": "Share calculation",
-        "shareToast": "Calculation link copied",
-        "currencyUnit": "EGP"
+        "shareToast": "Calculation link copied"
       }
     }
   },

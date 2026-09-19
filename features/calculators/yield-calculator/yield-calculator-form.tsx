@@ -27,8 +27,8 @@ export function YieldCalculatorForm({
   const t = useTranslations('pages.yieldCalculator.form');
   const locale = useLocale();
 
-  const monthlyIncome = useNumericInput({
-    initial: defaultValues?.monthlyIncome,
+  const principal = useNumericInput({
+    initial: defaultValues?.principal,
     allowFloat: false,
     locale,
   });
@@ -49,7 +49,7 @@ export function YieldCalculatorForm({
   });
 
   const [period, setPeriod] = React.useState<Period>(
-    defaultValues?.period ?? 'day'
+    defaultValues?.period ?? 'month'
   );
   const [taxMode, setTaxMode] = React.useState<TaxMode>(
     defaultValues?.taxMode ?? 'amount'
@@ -75,7 +75,7 @@ export function YieldCalculatorForm({
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     onSubmit({
-      monthlyIncome: monthlyIncome.numericValue,
+      principal: principal.numericValue,
       apy: apy.numericValue,
       period,
       periodCount: periodCount.numericValue || 1,
@@ -98,11 +98,11 @@ export function YieldCalculatorForm({
       </div>
 
       <AmountInput
-        label={t('monthlyIncome.label')}
-        placeholder={t('monthlyIncome.placeholder')}
-        suffix={t('monthlyIncome.suffix')}
-        value={monthlyIncome.value}
-        onChange={monthlyIncome.onChange}
+        label={t('principal.label')}
+        placeholder={t('principal.placeholder')}
+        suffix={t('principal.suffix')}
+        value={principal.value}
+        onChange={principal.onChange}
         inputMode="decimal"
       />
 

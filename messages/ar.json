@@ -11,55 +11,52 @@
   },
   "pages": {
     "yieldCalculator": {
-      "badge": "حاسبة الاستقلال المالي والحرية المالية",
-      "headline": "عايز دخل شهري كام؟",
-      "description": "احسب رأس المال المطلوب وتفاصيل العائد حسب المدة والدورية اللي تريحك بالضبط.",
+      "badge": "حاسبة العائد على الاستثمار",
+      "headline": "هتكسب كام على استثمارك؟",
+      "description": "حط رأس مالك والفائدة السنوية ومدة الاستثمار، وهنحسبلك العائد الإجمالي بعد الضريبة.",
       "form": {
-        "sectionLabel": "حدد هدفك الشهري",
-        "monthlyIncome": {
-          "label": "عايز تتصرف كام في الشهر؟",
-          "placeholder": "الدخل الشهري المستهدف",
-          "suffix": "جنيه / شهرياً"
+        "sectionLabel": "أدخل بيانات الاستثمار",
+        "principal": {
+          "label": "رأس المال",
+          "placeholder": "المبلغ اللي هتستثمره",
+          "suffix": "ج.م"
         },
         "apy": {
-          "label": "متوسط الفائدة السنوية المتوقعة (% APY)",
-          "placeholder": "اكتب النسبة المئوية",
+          "label": "الفائدة السنوية (% APY)",
+          "placeholder": "النسبة السنوية المتوقعة",
           "suffix": "%"
         },
         "period": {
-          "label": "عايز تحسب العائد في فترة ادايه؟",
-          "placeholder": "عدد الفترات",
+          "label": "مدة الاستثمار",
+          "placeholder": "العدد",
           "day": "يوم",
           "month": "شهر",
           "year": "سنة"
         },
         "tax": {
-          "label": "عايز تخصم ضريبة من العائد؟",
+          "label": "في ضريبة بتتسحب؟",
           "placeholder": "قيمة الضريبة",
-          "modeAmount": "جنيه",
-          "modePercentage": "نسبة مئوية",
-          "placeholderAmount": "0",
-          "placeholderPercentage": "0",
+          "modeAmount": "ج.م",
+          "modePercentage": "نسبة %",
           "noTax": "بدون ضريبة"
         },
         "submit": "احسب"
       },
       "result": {
-        "badge": "أصل رأس المال المطلوب",
-        "hint": "محتاج تحطه في البنك أو الصندوق.",
+        "badge": "العائد على الاستثمار",
+        "returnLabel": "هتكسب بعد الضريبة",
+        "gainLabel": "نسبة الربح من رأس المال:",
         "unit": "جنيه مصري",
-        "disclaimer": "المبلغ ده يفضل زي ما هو بحساباتك ومايقلش أرباحه أول بأول.",
-        "returnLabel": "العائد اللي هيجيلك:",
-        "perDay": "معادل باليوم",
-        "perMonth": "معادل بالشهر",
-        "perYear": "معادل بالسنة",
+        "currencyUnit": "ج.م",
+        "perDay": "يومياً",
+        "perMonth": "شهرياً",
+        "perYear": "سنوياً",
         "periodDay": "كل 24 ساعة",
         "periodMonth": "كل شهر",
         "periodYear": "كل سنة",
         "reset": "إعادة",
         "share": "مشاركة الحسبة",
-        "shareToast": "تم نسخ رابط الحسبة",
-        "currencyUnit": "ج.م"
+        "shareToast": "تم نسخ رابط الحسبة"
       }
     }
   },
