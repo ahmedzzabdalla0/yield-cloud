@@ -77,7 +77,7 @@ function SelectInput({
             data-slot="select-input-trigger"
             className={cn(
               'text-body-md text-foreground data-placeholder:text-muted-foreground flex h-full shrink-0 items-center gap-1.5 px-3 outline-none rtl:flex-row-reverse',
-              '[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=size-])]:size-4'
+              '[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=size-])]:size-4 [&>span:first-child]:select-none'
             )}
           >
             <SelectPrimitive.Value />
