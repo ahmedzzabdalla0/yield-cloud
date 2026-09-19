@@ -9,7 +9,7 @@
     "lint": "eslint",
     "format": "prettier --write \"./**/*.{ts,tsx,js,jsx,json,css,md}\"",
     "format:check": "prettier --check \"./**/*.{ts,tsx,js,jsx,json,css,md}\"",
-    "prepare": "if [ \"$CI\" = \"true\" ]; then echo \"Skipping Husky in CI\"; else husky; fi"
+    "prepare": "is-ci || husky"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
@@ -42,6 +42,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.3.5",
     "eslint-plugin-tailwindcss": "^4.4.0",
+    "is-ci": "^4.1.0",
     "prettier": "^3.9.8",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "tailwindcss": "^4",
