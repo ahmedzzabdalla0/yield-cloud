@@ -23,7 +23,7 @@ export function Header() {
             <Link
               href="/about"
               className={cn(
-                'text-body-sm hover:bg-muted hover:text-foreground inline-flex rounded-xl px-3 py-2 font-medium transition-colors duration-200 sm:items-center',
+                'text-body-sm hover:bg-muted hover:text-foreground max-sm:text-body-sm inline-flex h-fit rounded-md px-3 py-1.5 font-medium transition-colors duration-200 max-sm:px-1 max-sm:py-0 sm:items-center',
                 pathname === '/about'
                   ? 'text-foreground'
                   : 'text-muted-foreground'

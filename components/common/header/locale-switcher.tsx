@@ -24,7 +24,7 @@ export function LocaleSwitcher({ className }: { className?: string }) {
       size="sm"
       onClick={toggle}
       className={cn(
-        'text-muted-foreground hover:text-foreground gap-1.5',
+        'text-muted-foreground hover:text-foreground max-sm:text-body-sm gap-1.5 max-sm:h-8 max-sm:gap-1 max-sm:px-2.5',
         className
       )}
     >

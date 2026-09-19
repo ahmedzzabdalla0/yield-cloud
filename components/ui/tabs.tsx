@@ -50,7 +50,7 @@ function TabsTrigger({
         // layout
         'group relative inline-flex shrink-0 basis-0 cursor-pointer items-center justify-center gap-1.5',
         // spacing
-        'rounded-lg px-3 py-2 sm:px-5',
+        'rounded-lg px-3 py-1 sm:px-5 sm:py-2',
         // typography
         'text-body-sm font-medium whitespace-nowrap',
         // colors — default
