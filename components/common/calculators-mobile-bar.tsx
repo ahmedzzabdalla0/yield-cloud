@@ -1,8 +1,8 @@
 'use client';
 
-import { CalculatorTabs } from '@/components/common/calculator-tabs';
 import { Calculator } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { CalculatorTabs } from '@/components/common/calculator-tabs';
 
 export function CalculatorsMobileBar() {
   const t = useTranslations('nav');
