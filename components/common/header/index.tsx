@@ -12,7 +12,7 @@ export function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="border-border/60 bg-background/90 sticky top-0 z-40 w-full border-b backdrop-blur-sm">
+    <header className="border-border/60 bg-background w-full border-b">
       <div className="max-w-app mx-auto flex h-16 items-center justify-between gap-3 px-4">
         <Logo />
 
