@@ -1,29 +1,25 @@
 'use client';
 
-import { SlidersHorizontal } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import * as React from 'react';
-import { cn } from '@/lib/utils';
+import { useFormValidation } from '@/hooks/use-form-validation';
 import { useNumericInput } from '@/hooks/use-numeric-input';
-import { useYieldFormValidation } from '@/hooks/use-yield-form-validation';
-import { Button } from '@/components/ui/button';
 import { AmountInput } from '@/components/ui/input';
 import {
   SelectInput,
   type SelectInputOption,
 } from '@/components/ui/select-input';
+import { CalculatorFormCard } from '@/features/calculators/shared/calculator-form-card';
 import type { Period, TaxMode, YieldFormValues } from './types';
 
 type YieldCalculatorFormProps = {
   onSubmit: (values: YieldFormValues) => void;
   defaultValues?: Partial<YieldFormValues>;
-  className?: string;
 };
 
 export function YieldCalculatorForm({
   onSubmit,
   defaultValues,
-  className,
 }: YieldCalculatorFormProps) {
   const t = useTranslations('pages.yieldCalculator.form');
   const locale = useLocale();
@@ -56,14 +52,43 @@ export function YieldCalculatorForm({
     defaultValues?.taxMode ?? 'amount'
   );
 
-  const { errors, validate, clearError } = useYieldFormValidation({
-    required: t('validation.required'),
-    principalMin: t('validation.principalMin'),
-    apyMin: t('validation.apyMin'),
-    apyMax: t('validation.apyMax'),
-    periodCountMin: t('validation.periodCountMin'),
-    taxValueMin: t('validation.taxValueMin'),
-  });
+  const { errors, validate, clearError } = useFormValidation<YieldFormValues>([
+    {
+      field: 'principal',
+      validate: (val) => {
+        const n = val as number;
+        if (!n || n <= 0)
+          return n < 0
+            ? t('validation.principalMin')
+            : t('validation.required');
+      },
+    },
+    {
+      field: 'apy',
+      validate: (val) => {
+        const n = val as number;
+        if (!n || n <= 0)
+          return n < 0 ? t('validation.apyMin') : t('validation.required');
+        if (n > 100) return t('validation.apyMax');
+      },
+    },
+    {
+      field: 'periodCount',
+      validate: (val) => {
+        const n = val as number;
+        if (!n || n <= 0)
+          return n < 0
+            ? t('validation.periodCountMin')
+            : t('validation.required');
+      },
+    },
+    {
+      field: 'taxValue',
+      validate: (val) => {
+        if ((val as number) < 0) return t('validation.taxValueMin');
+      },
+    },
+  ]);
 
   const periodOptions = React.useMemo<SelectInputOption[]>(
     () => [
@@ -100,18 +125,11 @@ export function YieldCalculatorForm({
   }
 
   return (
-    <form
+    <CalculatorFormCard
+      sectionLabel={t('sectionLabel')}
+      submitLabel={t('submit')}
       onSubmit={handleSubmit}
-      className={cn(
-        'bg-card flex flex-col gap-5 rounded-2xl border p-5',
-        className
-      )}
     >
-      <div className="flex items-center gap-2 border-b pb-2 lg:pb-3">
-        <SlidersHorizontal className="text-primary size-4 shrink-0" />
-        <span className="text-body-lg font-semibold">{t('sectionLabel')}</span>
-      </div>
-
       <AmountInput
         label={t('principal.label')}
         placeholder={t('principal.placeholder')}
@@ -176,10 +194,6 @@ export function YieldCalculatorForm({
         }
         errorText={errors.taxValue}
       />
-
-      <Button type="submit" size="lg" className="w-full">
-        {t('submit')}
-      </Button>
-    </form>
+    </CalculatorFormCard>
   );
 }
