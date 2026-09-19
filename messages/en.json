@@ -40,7 +40,15 @@
           "modePercentage": "Percentage %",
           "noTax": "No tax"
         },
-        "submit": "Calculate"
+        "submit": "Calculate",
+        "validation": {
+          "required": "This field is required",
+          "principalMin": "Principal must be greater than zero",
+          "apyMin": "Yield rate must be greater than zero",
+          "apyMax": "Yield rate cannot exceed 100%",
+          "periodCountMin": "Period must be greater than zero",
+          "taxValueMin": "Tax value cannot be negative"
+        }
       },
       "result": {
         "badge": "Investment return",

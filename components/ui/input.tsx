@@ -72,7 +72,10 @@ function AmountInput({
           id={inputId}
           aria-invalid={invalid}
           dir="ltr"
-          className="h-full flex-1 border-none bg-transparent shadow-none focus-visible:ring-0 ltr:text-left rtl:text-right"
+          className={cn(
+            'h-full flex-1 border-none bg-transparent shadow-none focus-visible:ring-0 ltr:text-left rtl:text-right',
+            suffix && 'rounded-s-none ltr:rounded-e-none'
+          )}
           {...props}
         />
         {suffix && (

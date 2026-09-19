@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import * as React from 'react';
 import { cn } from '@/lib/utils';
 import { useNumericInput } from '@/hooks/use-numeric-input';
+import { useYieldFormValidation } from '@/hooks/use-yield-form-validation';
 import { Button } from '@/components/ui/button';
 import { AmountInput } from '@/components/ui/input';
 import {
@@ -55,6 +56,15 @@ export function YieldCalculatorForm({
     defaultValues?.taxMode ?? 'amount'
   );
 
+  const { errors, validate, clearError } = useYieldFormValidation({
+    required: t('validation.required'),
+    principalMin: t('validation.principalMin'),
+    apyMin: t('validation.apyMin'),
+    apyMax: t('validation.apyMax'),
+    periodCountMin: t('validation.periodCountMin'),
+    taxValueMin: t('validation.taxValueMin'),
+  });
+
   const periodOptions = React.useMemo<SelectInputOption[]>(
     () => [
       { value: 'day', label: t('period.day') },
@@ -74,14 +84,19 @@ export function YieldCalculatorForm({
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    onSubmit({
+
+    const values: YieldFormValues = {
       principal: principal.numericValue,
       apy: apy.numericValue,
       period,
-      periodCount: periodCount.numericValue || 1,
+      periodCount: periodCount.numericValue,
       taxMode,
       taxValue: taxValue.numericValue,
-    });
+    };
+
+    if (!validate(values)) return;
+
+    onSubmit({ ...values, periodCount: values.periodCount || 1 });
   }
 
   return (
@@ -102,8 +117,12 @@ export function YieldCalculatorForm({
         placeholder={t('principal.placeholder')}
         suffix={t('principal.suffix')}
         value={principal.value}
-        onChange={principal.onChange}
+        onChange={(e) => {
+          principal.onChange(e);
+          clearError('principal');
+        }}
         inputMode="decimal"
+        errorText={errors.principal}
       />
 
       <AmountInput
@@ -111,34 +130,51 @@ export function YieldCalculatorForm({
         placeholder={t('apy.placeholder')}
         suffix={t('apy.suffix')}
         value={apy.value}
-        onChange={apy.onChange}
+        onChange={(e) => {
+          apy.onChange(e);
+          clearError('apy');
+        }}
         inputMode="decimal"
+        errorText={errors.apy}
       />
 
       <SelectInput
         label={t('period.label')}
         inputValue={periodCount.value}
-        onInputChange={periodCount.onChange}
+        onInputChange={(e) => {
+          periodCount.onChange(e);
+          clearError('periodCount');
+        }}
         inputMode="numeric"
         placeholder={t('period.placeholder')}
         selectValue={period}
         onSelectChange={(v) => setPeriod(v as Period)}
         options={periodOptions}
+        errorText={errors.periodCount}
       />
 
       <SelectInput
         label={t('tax.label')}
         inputValue={taxValue.value}
-        onInputChange={taxValue.onChange}
+        onInputChange={(e) => {
+          taxValue.onChange(e);
+          clearError('taxValue');
+        }}
         inputMode="decimal"
         placeholder={t('tax.placeholder')}
         selectValue={taxMode}
         onSelectChange={(v) => {
           setTaxMode(v as TaxMode);
           taxValue.reset();
+          clearError('taxValue');
         }}
         options={taxModeOptions}
-        helperText={taxValue.numericValue === 0 ? t('tax.noTax') : undefined}
+        helperText={
+          !errors.taxValue && taxValue.numericValue === 0
+            ? t('tax.noTax')
+            : undefined
+        }
+        errorText={errors.taxValue}
       />
 
       <Button type="submit" size="lg" className="w-full">
