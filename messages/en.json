@@ -4,10 +4,11 @@
     "yieldCalculatorShort": "Yield",
     "capitalCalculator": "Capital Calculator",
     "capitalCalculatorShort": "Capital",
-    "goalCalculator": "Financial Goal",
-    "goalCalculatorShort": "Goal",
-    "calculators": "Calculators",
-    "about": "About Us"
+    "calculators": "Calculators"
+  },
+  "footer": {
+    "copyright": "© {year} Yield Cloud. All rights reserved.",
+    "builtBy": "Developed by"
   },
   "pages": {
     "capitalCalculator": {
@@ -54,7 +55,7 @@
         "badge": "Required capital",
         "principalLabel": "You need to invest this amount",
         "gainLabel": "Effective annual yield",
-        "unit": "Egyptian pounds",
+        "unit": "Pounds",
         "currencyUnit": "EGP",
         "perDay": "Daily equivalent",
         "perMonth": "Monthly equivalent",
@@ -141,18 +142,6 @@
       "description": "What monthly income are you aiming for? Calculate the required capital and full return breakdown by duration and frequency.",
       "ogTitle": "Monthly Income & Financial Freedom Calculator | Yield Cloud",
       "ogDescription": "Set your target monthly income and calculate the capital required, with daily, monthly, and annual return breakdowns."
-    },
-    "goalCalculator": {
-      "title": "Financial Goal Planner | Yield Cloud",
-      "description": "When and how will you reach your financial goal? Set your target, current savings, and timeline — we calculate your smart savings and investment plan.",
-      "ogTitle": "Smart Savings & Investment Goal Planner | Yield Cloud",
-      "ogDescription": "Calculate the savings plan needed to hit your financial goal. Set your target amount, current balance, and timeframe — we handle the rest."
-    },
-    "about": {
-      "title": "About Us | Yield Cloud",
-      "description": "Yield Cloud is an independent Egyptian platform helping you make smarter investment decisions. We calculate returns, clarify your options, and stand by you on your path to financial freedom.",
-      "ogTitle": "About Us | Yield Cloud",
-      "ogDescription": "Learn about Yield Cloud — our vision, mission, and how we help Egyptians achieve financial freedom through transparent and accessible investment tools."
     }
   }
 }
