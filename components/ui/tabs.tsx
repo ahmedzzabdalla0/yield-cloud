@@ -1,6 +1,7 @@
 'use client';
 
 import * as TabsPrimitive from '@radix-ui/react-tabs';
+import { Slottable } from '@radix-ui/react-slot';
 import { cn } from 'cn';
 import * as React from 'react';
 
@@ -49,7 +50,7 @@ function TabsTrigger({
         // layout
         'group relative inline-flex shrink-0 basis-0 cursor-pointer items-center justify-center gap-1.5',
         // spacing
-        'rounded-lg px-3 py-2',
+        'rounded-lg px-3 py-2 sm:px-5',
         // typography
         'text-body-sm font-medium whitespace-nowrap',
         // colors — default
@@ -73,7 +74,7 @@ function TabsTrigger({
       {!hideIcon && (
         <div className="w-1.25 group-data-[state=active]:hidden" aria-hidden />
       )}
-      {children}
+      <Slottable>{children}</Slottable>
       {!hideIcon && (
         <div className="w-1.25 group-data-[state=active]:hidden" aria-hidden />
       )}

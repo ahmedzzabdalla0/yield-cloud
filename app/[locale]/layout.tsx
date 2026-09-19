@@ -4,7 +4,9 @@ import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { cn } from '@/lib/utils';
+import { Header } from '@/components/common/header';
 import '../globals.css';
+import { CalculatorTabs } from '@/components/common/calculator-tabs';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -37,6 +39,10 @@ export default async function RootLayout({ children, params }: Props) {
     >
       <body className="flex min-h-full flex-col">
         <NextIntlClientProvider messages={messages}>
+          <Header />
+          <div className="border-border/60 bg-background/90 sticky top-16 z-30 border-b px-4 py-2 backdrop-blur-sm lg:hidden">
+            <CalculatorTabs />
+          </div>
           {children}
         </NextIntlClientProvider>
       </body>
