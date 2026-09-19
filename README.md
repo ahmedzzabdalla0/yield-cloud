@@ -48,7 +48,6 @@ The reverse of the yield calculator. Enter your target return, APY, and period �
 - **Smart number formatting** — Currency auto-compacts to `1.5M` / `2.3B` for large values; standard thousands separator below 1M
 - **Form validation** — Field-level error messages appear on submit and clear on edit, with a fully generic validation hook
 - **Responsive** — Mobile-first grid layout; calculator tabs adapt between mobile (compact) and desktop (full labels with icons)
-- **ISR** — Pages revalidate automatically at the start of each new year (dynamic `revalidate` computed at build time)
 
 ---
 
@@ -94,8 +93,7 @@ yield-cloud/
 │   └── use-calculator-url-state.ts       # URL state encode/decode
 ├── lib/
 │   ├── formatters.ts                     # Currency, percent, period formatting
-│   ├── calculator-types.ts               # Shared domain types
-│   └── revalidate.ts                     # ISR helper
+│   └── calculator-types.ts               # Shared domain types
 ├── components/
 │   ├── common/                           # Header, Footer, Calculator tabs
 │   └── ui/                               # Design system components
@@ -176,8 +174,6 @@ Locale prefix uses `as-needed` — English routes have no prefix, Arabic routes 
 **Generic calculator shells** — The `shared/` folder contains three reusable shells (`CalculatorClientShell`, `CalculatorFormCard`, `CalculatorResultCard`) that handle layout, gradient styling, stats grid, share/reset footer, and clipboard copy. Each calculator only defines its domain logic (types, formula, fields) and composes these shells.
 
 **Input-level max enforcement** — The `useNumericInput` hook accepts a `max` option that silently rejects keystrokes exceeding the limit, preventing astronomical inputs before they reach validation.
-
-**ISR with yearly revalidation** — `getSecondsUntilNextYear()` computes the exact seconds until UTC midnight on Jan 1st at build time, used as the `revalidate` export — ensuring the copyright year in the footer refreshes automatically with no manual deploy.
 
 ---
 
