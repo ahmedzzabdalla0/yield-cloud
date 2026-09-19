@@ -9,7 +9,7 @@
     "lint": "eslint",
     "format": "prettier --write \"./**/*.{ts,tsx,js,jsx,json,css,md}\"",
     "format:check": "prettier --check \"./**/*.{ts,tsx,js,jsx,json,css,md}\"",
-    "prepare": "husky"
+    "prepare": "if [ \"$CI\" = \"true\" ]; then echo \"Skipping Husky in CI\"; else husky; fi"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",

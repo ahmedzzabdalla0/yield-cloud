@@ -4,11 +4,16 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Yield Cloud',
     short_name: 'Yield Cloud',
-    description: 'Yield Cloud Application',
-    start_url: '/',
+    description:
+      'Egyptian investment calculators — compute your yield and required capital instantly.',
+    start_url: '/yield-calculator',
     display: 'standalone',
-    background_color: '#ffffff',
-    theme_color: '#ffffff',
+    orientation: 'portrait',
+    background_color: '#f8fafc',
+    theme_color: '#059669',
+    categories: ['finance', 'utilities'],
+    lang: 'en',
+    dir: 'ltr',
     icons: [
       {
         src: '/web-app-manifest-192x192.png',
