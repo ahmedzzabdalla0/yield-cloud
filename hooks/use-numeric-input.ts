@@ -6,6 +6,7 @@ type Options = {
   initial?: number;
   allowFloat?: boolean;
   locale?: string;
+  max?: number;
 };
 
 function formatThousands(integerPart: string, locale: string): string {
@@ -25,7 +26,12 @@ function sanitize(raw: string, allowFloat: boolean): string {
 }
 
 export function useNumericInput(options: Options = {}) {
-  const { initial = undefined, allowFloat = false, locale = 'en-US' } = options;
+  const {
+    initial = undefined,
+    allowFloat = false,
+    locale = 'en-US',
+    max,
+  } = options;
 
   const [raw, setRaw] = React.useState(() => {
     if (initial == undefined) return '';
@@ -47,11 +53,18 @@ export function useNumericInput(options: Options = {}) {
 
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     const stripped = e.target.value.replace(/,/g, '');
-    setRaw(sanitize(stripped, allowFloat));
+    const sanitized = sanitize(stripped, allowFloat);
+
+    if (max !== undefined) {
+      const num = parseFloat(sanitized.replace(/,/g, ''));
+      if (!isNaN(num) && num > max) return;
+    }
+
+    setRaw(sanitized);
   }
 
   function reset() {
-    setRaw(initial === 0 ? '' : String(initial));
+    setRaw(initial === 0 ? '' : String(initial ?? ''));
   }
 
   return { value, numericValue, onChange, reset };

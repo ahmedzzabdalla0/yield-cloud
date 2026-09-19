@@ -12,18 +12,25 @@ const {
 
 export const capitalCalculatorMetadata: LocaleMetadata = {
   ar: {
-    title: 'رأس المال | غيمة العائد',
+    title: 'حاسبة رأس المال المطلوب | غيمة العائد',
     description:
-      'عايز دخل شهري كام؟ احسب رأس المال المطلوب وتفاصيل العائد حسب المدة والدورية — هنريحك لحد الضبط.',
+      'عايز تجيب عائد معين؟ أدخل العائد المستهدف والفائدة السنوية والمدة، وهنحسبلك رأس المال الإجمالي اللي محتاج تستثمره.',
     applicationName,
     authors,
     creator,
     publisher,
-    keywords: keywords.ar,
+    keywords: [
+      ...keywords.ar,
+      'رأس المال المطلوب',
+      'حاسبة رأس المال',
+      'عائد مستهدف',
+      'كم أحتاج للاستثمار',
+      'تخطيط مالي',
+    ],
     openGraph: {
-      title: 'حاسبة الدخل الشهري والحرية المالية | غيمة العائد',
+      title: 'حاسبة رأس المال المطلوب | غيمة العائد',
       description:
-        'حدد الدخل الشهري اللي بتحلم بيه واحسب رأس المال المطلوب مع تفاصيل العائد اليومي والشهري والسنوي.',
+        'عايز تجيب عائد معين من استثمارك؟ حدد المبلغ المستهدف والفائدة والمدة وهنحسبلك رأس المال الدقيق اللي محتاجه.',
       url: `${baseUrl}/ar/capital-calculator`,
       siteName: 'غيمة العائد',
       locale: 'ar_EG',
@@ -31,47 +38,54 @@ export const capitalCalculatorMetadata: LocaleMetadata = {
     },
     twitter: {
       ...twitter,
-      title: 'حاسبة الدخل الشهري | غيمة العائد',
+      title: 'حاسبة رأس المال المطلوب | غيمة العائد',
       description:
-        'احسب رأس المال اللي محتاجه عشان توصل لدخلك الشهري المستهدف.',
+        'احسب رأس المال اللي محتاج تستثمره عشان توصل لعائدك المستهدف.',
     },
     alternates: {
       canonical: `${baseUrl}/ar/capital-calculator`,
       languages: {
         'ar-EG': `${baseUrl}/ar/capital-calculator`,
-        'en-US': `${baseUrl}/en/capital-calculator`,
+        'en-US': `${baseUrl}/capital-calculator`,
       },
     },
   },
   en: {
-    title: 'Capital Calculator | Yield Cloud',
+    title: 'Required Capital Calculator | Yield Cloud',
     description:
-      'What monthly income are you aiming for? Calculate the required capital and full return breakdown by duration and frequency.',
+      'Want to earn a specific return? Enter your target return, annual yield rate, and period — we calculate exactly how much capital you need to invest.',
     applicationName,
     authors,
     creator,
     publisher,
-    keywords: keywords.en,
+    keywords: [
+      ...keywords.en,
+      'required capital calculator',
+      'how much to invest',
+      'target return calculator',
+      'investment planning',
+      'reverse yield calculator',
+    ],
     openGraph: {
-      title: 'Monthly Income & Financial Freedom Calculator | Yield Cloud',
+      title: 'Required Capital Calculator | Yield Cloud',
       description:
-        'Set your target monthly income and calculate the capital required, with daily, monthly, and annual return breakdowns.',
-      url: `${baseUrl}/en/capital-calculator`,
+        'How much do you need to invest to reach your target return? Enter the amount you want to earn, the APY, and the period — we do the math.',
+      url: `${baseUrl}/capital-calculator`,
       siteName: 'Yield Cloud',
       locale: 'en_US',
       type: 'website',
     },
     twitter: {
       ...twitter,
-      title: 'Capital Calculator | Yield Cloud',
+      title: 'Required Capital Calculator | Yield Cloud',
       description:
-        'Calculate the capital required to reach your target monthly income.',
+        'Calculate the exact capital needed to achieve your target investment return.',
     },
     alternates: {
-      canonical: `${baseUrl}/en/capital-calculator`,
+      canonical: `${baseUrl}/capital-calculator`,
       languages: {
         'ar-EG': `${baseUrl}/ar/capital-calculator`,
-        'en-US': `${baseUrl}/en/capital-calculator`,
+        'en-US': `${baseUrl}/capital-calculator`,
       },
     },
   },

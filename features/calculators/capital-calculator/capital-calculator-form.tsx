@@ -10,23 +10,23 @@ import {
   type SelectInputOption,
 } from '@/components/ui/select-input';
 import { CalculatorFormCard } from '@/features/calculators/shared/calculator-form-card';
-import type { Period, TaxMode, YieldFormValues } from './types';
+import type { CapitalFormValues, Period, TaxMode } from './types';
 
-type YieldCalculatorFormProps = {
-  onSubmit: (values: YieldFormValues) => void;
-  defaultValues?: Partial<YieldFormValues>;
+type CapitalCalculatorFormProps = {
+  onSubmit: (values: CapitalFormValues) => void;
+  defaultValues?: Partial<CapitalFormValues>;
 };
 
-const MAX_PRINCIPAL = 100_000_000_000;
+const MAX_TARGET_RETURN = 100_000_000;
 const MAX_PERIOD_COUNT = 3_650;
-const MAX_TAX_PERCENTAGE = 99.99;
 const MAX_APY = 100;
+const MAX_TAX_PERCENTAGE = 99.99;
 
-export function YieldCalculatorForm({
+export function CapitalCalculatorForm({
   onSubmit,
   defaultValues,
-}: YieldCalculatorFormProps) {
-  const t = useTranslations('pages.yieldCalculator.form');
+}: CapitalCalculatorFormProps) {
+  const t = useTranslations('pages.capitalCalculator.form');
   const locale = useLocale();
 
   const [period, setPeriod] = React.useState<Period>(
@@ -36,11 +36,11 @@ export function YieldCalculatorForm({
     defaultValues?.taxMode ?? 'amount'
   );
 
-  const principal = useNumericInput({
-    initial: defaultValues?.principal,
+  const targetReturn = useNumericInput({
+    initial: defaultValues?.targetReturn,
     allowFloat: false,
     locale,
-    max: MAX_PRINCIPAL,
+    max: MAX_TARGET_RETURN,
   });
   const apy = useNumericInput({
     initial: defaultValues?.apy,
@@ -61,43 +61,46 @@ export function YieldCalculatorForm({
     max: taxMode === 'percentage' ? MAX_TAX_PERCENTAGE : undefined,
   });
 
-  const { errors, validate, clearError } = useFormValidation<YieldFormValues>([
-    {
-      field: 'principal',
-      validate: (val) => {
-        const n = val as number;
-        if (!n || n <= 0)
-          return n < 0
-            ? t('validation.principalMin')
-            : t('validation.required');
+  const { errors, validate, clearError } = useFormValidation<CapitalFormValues>(
+    [
+      {
+        field: 'targetReturn',
+        validate: (val) => {
+          const n = val as number;
+          if (!n || n <= 0) return t('validation.required');
+          if (n > MAX_TARGET_RETURN) return t('validation.targetReturnMax');
+        },
       },
-    },
-    {
-      field: 'apy',
-      validate: (val) => {
-        const n = val as number;
-        if (!n || n <= 0)
-          return n < 0 ? t('validation.apyMin') : t('validation.required');
-        if (n > 100) return t('validation.apyMax');
+      {
+        field: 'apy',
+        validate: (val) => {
+          const n = val as number;
+          if (!n || n <= 0) return t('validation.required');
+          if (n > 100) return t('validation.apyMax');
+        },
       },
-    },
-    {
-      field: 'periodCount',
-      validate: (val) => {
-        const n = val as number;
-        if (!n || n <= 0)
-          return n < 0
-            ? t('validation.periodCountMin')
-            : t('validation.required');
+      {
+        field: 'periodCount',
+        validate: (val) => {
+          const n = val as number;
+          if (!n || n <= 0) return t('validation.required');
+          if (n > MAX_PERIOD_COUNT) return t('validation.periodCountMax');
+        },
       },
-    },
-    {
-      field: 'taxValue',
-      validate: (val) => {
-        if ((val as number) < 0) return t('validation.taxValueMin');
+      {
+        field: 'taxValue',
+        validate: (val, values) => {
+          const n = val as number;
+          if (n < 0) return t('validation.taxValueMin');
+          if (
+            (values as CapitalFormValues).taxMode === 'percentage' &&
+            n >= 100
+          )
+            return t('validation.taxPercentageMax');
+        },
       },
-    },
-  ]);
+    ]
+  );
 
   const periodOptions = React.useMemo<SelectInputOption[]>(
     () => [
@@ -119,8 +122,8 @@ export function YieldCalculatorForm({
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    const values: YieldFormValues = {
-      principal: principal.numericValue,
+    const values: CapitalFormValues = {
+      targetReturn: targetReturn.numericValue,
       apy: apy.numericValue,
       period,
       periodCount: periodCount.numericValue,
@@ -140,16 +143,16 @@ export function YieldCalculatorForm({
       onSubmit={handleSubmit}
     >
       <AmountInput
-        label={t('principal.label')}
-        placeholder={t('principal.placeholder')}
-        suffix={t('principal.suffix')}
-        value={principal.value}
+        label={t('targetReturn.label')}
+        placeholder={t('targetReturn.placeholder')}
+        suffix={t('targetReturn.suffix')}
+        value={targetReturn.value}
         onChange={(e) => {
-          principal.onChange(e);
-          clearError('principal');
+          targetReturn.onChange(e);
+          clearError('targetReturn');
         }}
         inputMode="decimal"
-        errorText={errors.principal}
+        errorText={errors.targetReturn}
       />
 
       <AmountInput

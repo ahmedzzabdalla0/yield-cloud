@@ -3,8 +3,8 @@ import type { Period } from '@/lib/formatters';
 
 export type { Period, TaxMode };
 
-export type YieldFormValues = {
-  principal: number;
+export type CapitalFormValues = {
+  targetReturn: number;
   apy: number;
   period: Period;
   periodCount: number;
@@ -12,11 +12,11 @@ export type YieldFormValues = {
   taxValue: number;
 };
 
-export type YieldResult = {
+export type CapitalResult = {
+  requiredPrincipal: number;
   grossReturn: number;
-  taxDeduction: number;
   netReturn: number;
-  gainPercent: number;
+  effectiveApy: number;
   perDay: number;
   perMonth: number;
   perYear: number;

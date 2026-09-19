@@ -1,26 +1,32 @@
 import { formatCurrency, formatPercent, formatPeriod } from '@/lib/formatters';
-import type { TaxMode, YieldFormValues, YieldResult } from './types';
-import type { Period } from './types';
+import type {
+  CapitalFormValues,
+  CapitalResult,
+  Period,
+  TaxMode,
+} from './types';
 
 export { formatCurrency, formatPercent, formatPeriod };
 
-export const YIELD_CALC_PARAM_KEY = 's';
+export const CAPITAL_CALC_PARAM_KEY = 's';
 
 const VALID_PERIODS: Period[] = ['day', 'month', 'year'];
 const VALID_TAX_MODES: TaxMode[] = ['amount', 'percentage'];
 
-export function encodeYieldFormValues(values: YieldFormValues): string {
+export function encodeCapitalFormValues(values: CapitalFormValues): string {
   return btoa(encodeURIComponent(JSON.stringify(values)));
 }
 
-export function decodeYieldFormValues(encoded: string): YieldFormValues | null {
+export function decodeCapitalFormValues(
+  encoded: string
+): CapitalFormValues | null {
   try {
     const parsed = JSON.parse(
       decodeURIComponent(atob(encoded))
-    ) as Partial<YieldFormValues>;
+    ) as Partial<CapitalFormValues>;
 
     if (
-      typeof parsed.principal !== 'number' ||
+      typeof parsed.targetReturn !== 'number' ||
       typeof parsed.apy !== 'number' ||
       typeof parsed.periodCount !== 'number' ||
       typeof parsed.taxValue !== 'number' ||
@@ -30,14 +36,16 @@ export function decodeYieldFormValues(encoded: string): YieldFormValues | null {
       return null;
     }
 
-    return parsed as YieldFormValues;
+    return parsed as CapitalFormValues;
   } catch {
     return null;
   }
 }
 
-export function calcYield(values: YieldFormValues): NonNullable<YieldResult> {
-  const { principal, apy, period, periodCount, taxMode, taxValue } = values;
+export function calcCapital(
+  values: CapitalFormValues
+): NonNullable<CapitalResult> {
+  const { targetReturn, apy, period, periodCount, taxMode, taxValue } = values;
 
   const dailyRate = apy / 100 / 12 / 30;
 
@@ -48,25 +56,30 @@ export function calcYield(values: YieldFormValues): NonNullable<YieldResult> {
   };
 
   const days = periodDays[period];
-  const grossReturn = principal * dailyRate * days;
 
-  const taxDeduction =
+  const grossReturn =
     taxMode === 'percentage'
-      ? grossReturn * (taxValue / 100)
-      : Math.min(taxValue, grossReturn);
+      ? taxValue >= 100
+        ? targetReturn
+        : targetReturn / (1 - taxValue / 100)
+      : targetReturn + Math.max(0, taxValue);
 
-  const netReturn = Math.max(0, grossReturn - taxDeduction);
-  const gainPercent = principal > 0 ? (netReturn / principal) * 100 : 0;
+  const requiredPrincipal =
+    dailyRate > 0 && days > 0 ? grossReturn / (dailyRate * days) : 0;
 
-  const perDay = principal * dailyRate;
+  const netReturn = targetReturn;
+  const effectiveApy =
+    requiredPrincipal > 0 ? (grossReturn / requiredPrincipal) * 100 : 0;
+
+  const perDay = requiredPrincipal * dailyRate;
   const perMonth = perDay * 30;
   const perYear = perDay * 365;
 
   return {
+    requiredPrincipal,
     grossReturn,
-    taxDeduction,
     netReturn,
-    gainPercent,
+    effectiveApy,
     perDay,
     perMonth,
     perYear,

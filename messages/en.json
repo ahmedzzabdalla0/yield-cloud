@@ -10,6 +10,60 @@
     "about": "About Us"
   },
   "pages": {
+    "capitalCalculator": {
+      "badge": "Required Capital Calculator",
+      "headline": "How much do you need to invest to hit your target return?",
+      "description": "Set your target return, annual yield rate, and period — we calculate the exact capital you need to put in.",
+      "form": {
+        "sectionLabel": "Enter your target return details",
+        "targetReturn": {
+          "label": "Target return",
+          "placeholder": "Amount you want to earn",
+          "suffix": "EGP"
+        },
+        "apy": {
+          "label": "Annual yield rate (APY %)",
+          "placeholder": "Expected annual rate",
+          "suffix": "%"
+        },
+        "period": {
+          "label": "Over what period?",
+          "placeholder": "Count",
+          "day": "Day",
+          "month": "Month",
+          "year": "Year"
+        },
+        "tax": {
+          "label": "Any tax deducted from returns?",
+          "placeholder": "Tax value",
+          "modeAmount": "EGP",
+          "modePercentage": "Percentage %",
+          "noTax": "No tax"
+        },
+        "submit": "Calculate",
+        "validation": {
+          "required": "This field is required",
+          "targetReturnMax": "Target return is too large",
+          "apyMax": "Yield rate cannot exceed 100%",
+          "periodCountMax": "Period cannot exceed 3,650 days",
+          "taxValueMin": "Tax value cannot be negative",
+          "taxPercentageMax": "Tax percentage must be less than 100%"
+        }
+      },
+      "result": {
+        "badge": "Required capital",
+        "principalLabel": "You need to invest this amount",
+        "gainLabel": "Effective annual yield",
+        "unit": "Egyptian pounds",
+        "currencyUnit": "EGP",
+        "perDay": "Daily equivalent",
+        "perMonth": "Monthly equivalent",
+        "perYear": "Total annual return",
+        "reset": "Reset",
+        "share": "Share calculation",
+        "shareToast": "Calculation link copied"
+      }
+    },
     "yieldCalculator": {
       "badge": "Investment Return Calculator",
       "headline": "How much will you earn on your investment?",
