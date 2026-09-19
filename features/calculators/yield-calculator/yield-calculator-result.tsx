@@ -3,6 +3,7 @@
 import { RefreshCw, Share2, TrendingUp } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { toast } from 'sonner';
+import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard';
 import { Badge } from '@/components/ui/bage';
 import { Button } from '@/components/ui/button';
 import {
@@ -15,7 +16,6 @@ import {
 } from '@/components/ui/result-card';
 import { formatCurrency, formatPercent } from './lib';
 import type { YieldResult } from './types';
-import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard';
 
 type YieldCalculatorResultProps = {
   result: YieldResult;
