@@ -13,7 +13,7 @@
   "pages": {
     "capitalCalculator": {
       "badge": "Required Capital Calculator",
-      "headline": "How much do you need to invest to hit your target return?",
+      "headline": "How much do you need to invest?",
       "description": "Set your target return, annual yield rate, and period — we calculate the exact capital you need to put in.",
       "form": {
         "sectionLabel": "Enter your target return details",
@@ -67,7 +67,7 @@
     },
     "yieldCalculator": {
       "badge": "Investment Return Calculator",
-      "headline": "How much will you earn on your investment?",
+      "headline": "What return will you earn?",
       "description": "Enter your capital, annual yield rate, and investment period — we calculate your gross and net return instantly.",
       "form": {
         "sectionLabel": "Enter investment details",

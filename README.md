@@ -28,13 +28,13 @@ Yield Cloud is an independent Egyptian financial platform that helps users make 
 
 ### Yield Calculator — حاسبة العائد
 
-> _How much will you earn on your investment?_
+> _What return will you earn?_
 
 Input your principal, annual yield rate (APY), and investment period. Receive a full breakdown of net return after tax, daily/monthly/yearly equivalents, and gain percentage relative to principal.
 
 ### Capital Calculator — حاسبة رأس المال
 
-> _How much do you need to invest to hit your target return?_
+> _How much do you need to invest?_
 
 The reverse of the yield calculator. Enter your target return, APY, and period — the calculator derives the exact required capital using an inverse daily-rate model.
 
