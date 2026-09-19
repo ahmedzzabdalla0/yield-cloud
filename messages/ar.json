@@ -9,6 +9,57 @@
     "calculators": "الحاسبات",
     "about": "مين إحنا"
   },
+  "pages": {
+    "yieldCalculator": {
+      "badge": "حاسبة الاستقلال المالي والحرية المالية",
+      "headline": "عايز دخل شهري كام؟",
+      "description": "احسب رأس المال المطلوب وتفاصيل العائد حسب المدة والدورية اللي تريحك بالضبط.",
+      "form": {
+        "sectionLabel": "حدد هدفك الشهري",
+        "monthlyIncome": {
+          "label": "عايز تتصرف كام في الشهر؟",
+          "placeholder": "اكتب الرقم أو تحرك المؤشر",
+          "suffix": "جنيه / شهرياً"
+        },
+        "apy": {
+          "label": "متوسط الفائدة السنوية المتوقعة (% APY)",
+          "placeholder": "اكتب النسبة المئوية",
+          "suffix": "%"
+        },
+        "period": {
+          "label": "عايز تحسب العائد في فترة ادايه؟",
+          "day": "يوم",
+          "month": "شهر",
+          "year": "سنة"
+        },
+        "tax": {
+          "label": "عايز تخصم ضريبة من العائد؟",
+          "modeAmount": "جنيه",
+          "modePercentage": "نسبة مئوية",
+          "placeholderAmount": "0",
+          "placeholderPercentage": "0",
+          "noTax": "بدون ضريبة"
+        },
+        "submit": "احسب"
+      },
+      "result": {
+        "badge": "أصل رأس المال المطلوب",
+        "hint": "محتاج تحطه في البنك أو الصندوق.",
+        "unit": "جنيه مصري",
+        "disclaimer": "المبلغ ده يفضل زي ما هو بحساباتك ومايقلش أرباحه أول بأول.",
+        "returnLabel": "العائد اللي هيجيلك:",
+        "perDay": "معادل باليوم",
+        "perMonth": "معادل بالشهر",
+        "perYear": "معادل بالسنة",
+        "periodDay": "كل 24 ساعة",
+        "periodMonth": "كل شهر",
+        "periodYear": "كل سنة",
+        "reset": "إعادة",
+        "share": "مشاركة الحسبة",
+        "currencyUnit": "ج.م"
+      }
+    }
+  },
   "metadata": {
     "yieldCalculator": {
       "title": "حساب العائد | غيمة العائد",

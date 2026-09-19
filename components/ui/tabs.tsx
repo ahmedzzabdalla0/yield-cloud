@@ -2,8 +2,8 @@
 
 import { Slottable } from '@radix-ui/react-slot';
 import * as TabsPrimitive from '@radix-ui/react-tabs';
-import { cn } from 'cn';
 import * as React from 'react';
+import { cn } from '@/lib/utils';
 
 function Tabs({
   className,
@@ -27,7 +27,7 @@ function TabsList({
       data-slot="tabs-list"
       dir="auto"
       className={cn(
-        'bg-muted inline-grid h-fit auto-cols-[1fr] grid-flow-col items-center gap-x-1.5 rounded-xl p-1.5',
+        'inline-grid h-fit auto-cols-[1fr] grid-flow-col items-center gap-x-1.5 rounded-xl bg-slate-100 p-1.5',
         className
       )}
       {...props}
@@ -52,7 +52,7 @@ function TabsTrigger({
         // spacing
         'rounded-lg px-3 py-1 sm:px-5 sm:py-2',
         // typography
-        'text-body-sm font-medium whitespace-nowrap',
+        'text-body-lg lg:text-body-md font-medium whitespace-nowrap',
         // colors — default
         'text-muted-foreground transition-colors duration-200',
         // colors — active

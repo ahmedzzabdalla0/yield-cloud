@@ -1,6 +1,6 @@
 import { type VariantProps, cva } from 'class-variance-authority';
-import { cn } from 'cn';
 import * as React from 'react';
+import { cn } from '@/lib/utils';
 
 const badgeVariants = cva(
   'inline-flex w-fit shrink-0 items-center justify-center gap-1 whitespace-nowrap rounded-full border font-medium [&_svg]:pointer-events-none [&_svg]:shrink-0',
@@ -76,7 +76,7 @@ function Badge({
         />
       )}
       {icon}
-      {children && <span className="truncate">{children}</span>}
+      {children}
     </span>
   );
 }

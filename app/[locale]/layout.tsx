@@ -37,7 +37,7 @@ export default async function RootLayout({ children, params }: Props) {
       lang={locale}
       dir={dir}
     >
-      <body className="flex min-h-full flex-col">
+      <body className="flex min-h-full flex-col bg-slate-50">
         <NextIntlClientProvider messages={messages}>
           <Header />
           <CalculatorsMobileBar />

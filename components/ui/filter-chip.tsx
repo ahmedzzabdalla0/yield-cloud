@@ -1,9 +1,9 @@
 'use client';
 
 import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
-import { cn } from 'cn';
 import { Check } from 'lucide-react';
 import * as React from 'react';
+import { cn } from '@/lib/utils';
 
 function FilterChipGroup({
   className,

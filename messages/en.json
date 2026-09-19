@@ -9,6 +9,57 @@
     "calculators": "Calculators",
     "about": "About Us"
   },
+  "pages": {
+    "yieldCalculator": {
+      "badge": "Financial Independence & Freedom Calculator",
+      "headline": "What monthly income do you want?",
+      "description": "Calculate the required capital and return details by duration and frequency — down to the last detail.",
+      "form": {
+        "sectionLabel": "Set your monthly goal",
+        "monthlyIncome": {
+          "label": "How much do you want to spend per month?",
+          "placeholder": "Enter amount or drag the slider",
+          "suffix": "EGP / month"
+        },
+        "apy": {
+          "label": "Expected average annual yield (APY %)",
+          "placeholder": "Enter percentage",
+          "suffix": "%"
+        },
+        "period": {
+          "label": "Which period do you want to calculate returns for?",
+          "day": "Day",
+          "month": "Month",
+          "year": "Year"
+        },
+        "tax": {
+          "label": "Do you want to deduct tax from the return?",
+          "modeAmount": "EGP",
+          "modePercentage": "Percentage",
+          "placeholderAmount": "0",
+          "placeholderPercentage": "0",
+          "noTax": "No tax"
+        },
+        "submit": "Calculate"
+      },
+      "result": {
+        "badge": "Required principal capital",
+        "hint": "You need to deposit this in a bank or fund.",
+        "unit": "Egyptian pounds",
+        "disclaimer": "Keep this amount untouched — don't withdraw the returns.",
+        "returnLabel": "Your return will be:",
+        "perDay": "Daily equivalent",
+        "perMonth": "Monthly equivalent",
+        "perYear": "Annual equivalent",
+        "periodDay": "every 24 hours",
+        "periodMonth": "every month",
+        "periodYear": "every year",
+        "reset": "Reset",
+        "share": "Share calculation",
+        "currencyUnit": "EGP"
+      }
+    }
+  },
   "metadata": {
     "yieldCalculator": {
       "title": "Yield Calculator | Yield Cloud",

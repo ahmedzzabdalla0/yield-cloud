@@ -1,8 +1,8 @@
 'use client';
 
-import { cn } from 'cn';
 import { AlertCircle } from 'lucide-react';
 import * as React from 'react';
+import { cn } from '@/lib/utils';
 
 function Input({ className, type, ...props }: React.ComponentProps<'input'>) {
   return (
@@ -10,7 +10,7 @@ function Input({ className, type, ...props }: React.ComponentProps<'input'>) {
       type={type}
       data-slot="input"
       className={cn(
-        'border-input bg-background text-body-md text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 flex h-11 w-full min-w-0 rounded-md border px-3 shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-3 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:ring-3',
+        'border-input bg-background text-heading-sm placeholder:text-body-md text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 flex h-11 w-full min-w-0 rounded-md border px-3 shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-3 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:ring-3',
         className
       )}
       {...props}
@@ -71,11 +71,12 @@ function AmountInput({
         <Input
           id={inputId}
           aria-invalid={invalid}
-          className="h-full flex-1 border-none bg-transparent text-end shadow-none focus-visible:ring-0"
+          dir="ltr"
+          className="h-full flex-1 border-none bg-transparent shadow-none focus-visible:ring-0 ltr:text-left rtl:text-right"
           {...props}
         />
         {suffix && (
-          <span className="text-body-sm text-muted-foreground flex h-full shrink-0 items-center px-3">
+          <span className="border-border bg-muted text-body-sm text-muted-foreground flex h-full shrink-0 items-center border-s px-3">
             {suffix}
           </span>
         )}

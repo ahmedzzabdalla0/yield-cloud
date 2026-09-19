@@ -1,5 +1,9 @@
+import { Wallet } from 'lucide-react';
 import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 import { yieldCalculatorMetadata } from '@/config/metadata';
+import { CalculatorPageHeader } from '@/components/common/calculator-page-header';
+import { YieldCalculatorClient } from '@/features/calculators/yield-calculator/yield-calculator-client';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -10,6 +14,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return yieldCalculatorMetadata[locale as 'ar' | 'en'];
 }
 
-export default function YieldCalculatorPage() {
-  return <div />;
+export default async function YieldCalculatorPage({ params }: Props) {
+  const { locale } = await params;
+  const t = await getTranslations({
+    locale,
+    namespace: 'pages.yieldCalculator',
+  });
+
+  return (
+    <div className="max-w-app mx-auto flex w-full flex-col gap-8 px-4 py-8">
+      <CalculatorPageHeader
+        badge={t('badge')}
+        icon={Wallet}
+        headline={t('headline')}
+        description={t('description')}
+      />
+      <YieldCalculatorClient />
+    </div>
+  );
 }

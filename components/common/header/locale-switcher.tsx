@@ -1,9 +1,9 @@
 'use client';
 
 import { usePathname, useRouter } from '@/i18n/navigation';
-import { cn } from 'cn';
 import { Globe } from 'lucide-react';
 import { useLocale } from 'next-intl';
+import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 
 export function LocaleSwitcher({ className }: { className?: string }) {
@@ -21,10 +21,10 @@ export function LocaleSwitcher({ className }: { className?: string }) {
   return (
     <Button
       variant="ghost"
-      size="sm"
+      size="default"
       onClick={toggle}
       className={cn(
-        'text-muted-foreground hover:text-foreground max-sm:text-body-sm gap-1.5 max-sm:h-8 max-sm:gap-1 max-sm:px-2.5',
+        'text-muted-foreground hover:text-foreground h-fit gap-1.5 bg-slate-100 py-1.5',
         className
       )}
     >

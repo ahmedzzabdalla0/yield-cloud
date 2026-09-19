@@ -1,8 +1,8 @@
 'use client';
 
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
-import { cn } from 'cn';
 import * as React from 'react';
+import { cn } from '@/lib/utils';
 
 function RadioCardGroup({
   className,
