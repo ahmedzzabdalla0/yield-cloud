@@ -1,13 +1,13 @@
-import { getSecondsUntilNextYear } from '@/lib/revalidate';
 import { Cairo } from 'next/font/google';
 import { routing } from '@/i18n/routing';
 import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
+import { getSecondsUntilNextYear } from '@/lib/revalidate';
 import { cn } from '@/lib/utils';
-import { Footer } from '@/components/common/footer';
 import { Toaster } from '@/components/ui/sonner';
 import { CalculatorsMobileBar } from '@/components/common/calculators-mobile-bar';
+import { Footer } from '@/components/common/footer';
 import { Header } from '@/components/common/header';
 import '../globals.css';
 
