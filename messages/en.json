@@ -58,6 +58,7 @@
         "periodYear": "every year",
         "reset": "Reset",
         "share": "Share calculation",
+        "shareToast": "Calculation link copied",
         "currencyUnit": "EGP"
       }
     }

@@ -6,6 +6,7 @@ import { getMessages } from 'next-intl/server';
 import { cn } from '@/lib/utils';
 import { CalculatorsMobileBar } from '@/components/common/calculators-mobile-bar';
 import { Header } from '@/components/common/header';
+import { Toaster } from '@/components/ui/sonner';
 import '../globals.css';
 
 export function generateStaticParams() {
@@ -42,6 +43,7 @@ export default async function RootLayout({ children, params }: Props) {
           <Header />
           <CalculatorsMobileBar />
           {children}
+          <Toaster position="bottom-center" richColors />
         </NextIntlClientProvider>
       </body>
     </html>

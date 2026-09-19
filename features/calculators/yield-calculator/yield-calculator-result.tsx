@@ -2,6 +2,7 @@
 
 import { Landmark, RefreshCw, Share2 } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
+import { toast } from 'sonner';
 import { Badge } from '@/components/ui/bage';
 import { Button } from '@/components/ui/button';
 import {
@@ -39,17 +40,9 @@ export function YieldCalculatorResult({
   const locale = useLocale();
 
   function handleShare() {
-    if (typeof navigator !== 'undefined' && navigator.share) {
-      navigator.share({
-        title: t('badge'),
-        text: result
-          ? `${t('badge')}: ${formatCurrency(result.principal, locale)} ${t('unit')}`
-          : t('badge'),
-        url: window.location.href,
-      });
-    } else {
-      navigator.clipboard.writeText(window.location.href);
-    }
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      toast.success(t('shareToast'));
+    });
   }
 
   return (

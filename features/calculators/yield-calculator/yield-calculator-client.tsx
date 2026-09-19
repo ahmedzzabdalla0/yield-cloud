@@ -16,14 +16,17 @@ export function YieldCalculatorClient() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const initialValues = React.useMemo<YieldFormValues | null>(() => {
+  const [formKey, setFormKey] = React.useState(0);
+  const [defaultValues, setDefaultValues] = React.useState<
+    YieldFormValues | undefined
+  >(() => {
     const encoded = searchParams.get(YIELD_CALC_PARAM_KEY);
-    if (encoded) return decodeYieldFormValues(encoded);
-    return null;
-  }, [searchParams]);
+    if (encoded) return decodeYieldFormValues(encoded) ?? undefined;
+    return undefined;
+  });
 
   const [result, setResult] = React.useState<YieldResult>(() =>
-    initialValues ? calcYield(initialValues) : null
+    defaultValues ? calcYield(defaultValues) : null
   );
 
   function handleSubmit(values: YieldFormValues) {
@@ -35,6 +38,8 @@ export function YieldCalculatorClient() {
 
   function handleReset() {
     setResult(null);
+    setDefaultValues(undefined);
+    setFormKey((k) => k + 1);
     const params = new URLSearchParams(searchParams.toString());
     params.delete(YIELD_CALC_PARAM_KEY);
     const query = params.toString();
@@ -50,8 +55,9 @@ export function YieldCalculatorClient() {
       </div>
       <div className="order-1">
         <YieldCalculatorForm
+          key={formKey}
           onSubmit={handleSubmit}
-          defaultValues={initialValues ?? undefined}
+          defaultValues={defaultValues}
         />
       </div>
     </div>
