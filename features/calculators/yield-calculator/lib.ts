@@ -1,4 +1,45 @@
-import type { YieldFormValues, YieldResult } from './types';
+import type { Period, TaxMode, YieldFormValues, YieldResult } from './types';
+
+export const YIELD_CALC_PARAM_KEY = 's';
+
+export const YIELD_CALC_DEFAULT_VALUES: YieldFormValues = {
+  monthlyIncome: 15_000,
+  apy: 24,
+  period: 'day',
+  periodCount: 24,
+  taxMode: 'amount',
+  taxValue: 0,
+};
+
+const VALID_PERIODS: Period[] = ['day', 'month', 'year'];
+const VALID_TAX_MODES: TaxMode[] = ['amount', 'percentage'];
+
+export function encodeYieldFormValues(values: YieldFormValues): string {
+  return btoa(encodeURIComponent(JSON.stringify(values)));
+}
+
+export function decodeYieldFormValues(encoded: string): YieldFormValues | null {
+  try {
+    const parsed = JSON.parse(
+      decodeURIComponent(atob(encoded))
+    ) as Partial<YieldFormValues>;
+
+    if (
+      typeof parsed.monthlyIncome !== 'number' ||
+      typeof parsed.apy !== 'number' ||
+      typeof parsed.periodCount !== 'number' ||
+      typeof parsed.taxValue !== 'number' ||
+      !VALID_PERIODS.includes(parsed.period as Period) ||
+      !VALID_TAX_MODES.includes(parsed.taxMode as TaxMode)
+    ) {
+      return null;
+    }
+
+    return parsed as YieldFormValues;
+  } catch {
+    return null;
+  }
+}
 
 export function calcYield(values: YieldFormValues): YieldResult {
   const { monthlyIncome, apy, period, periodCount, taxMode, taxValue } = values;

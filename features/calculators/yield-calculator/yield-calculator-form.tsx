@@ -15,31 +15,45 @@ import type { Period, TaxMode, YieldFormValues } from './types';
 
 type YieldCalculatorFormProps = {
   onSubmit: (values: YieldFormValues) => void;
+  defaultValues?: Partial<YieldFormValues>;
   className?: string;
 };
 
 export function YieldCalculatorForm({
   onSubmit,
+  defaultValues,
   className,
 }: YieldCalculatorFormProps) {
   const t = useTranslations('pages.yieldCalculator.form');
   const locale = useLocale();
 
   const monthlyIncome = useNumericInput({
-    initial: 15_000,
+    initial: defaultValues?.monthlyIncome ?? 15_000,
     allowFloat: false,
     locale,
   });
-  const apy = useNumericInput({ initial: 24, allowFloat: true, locale });
+  const apy = useNumericInput({
+    initial: defaultValues?.apy ?? 24,
+    allowFloat: true,
+    locale,
+  });
   const periodCount = useNumericInput({
-    initial: 24,
+    initial: defaultValues?.periodCount ?? 24,
     allowFloat: false,
     locale,
   });
-  const taxValue = useNumericInput({ initial: 0, allowFloat: true, locale });
+  const taxValue = useNumericInput({
+    initial: defaultValues?.taxValue ?? 0,
+    allowFloat: true,
+    locale,
+  });
 
-  const [period, setPeriod] = React.useState<Period>('day');
-  const [taxMode, setTaxMode] = React.useState<TaxMode>('amount');
+  const [period, setPeriod] = React.useState<Period>(
+    defaultValues?.period ?? 'day'
+  );
+  const [taxMode, setTaxMode] = React.useState<TaxMode>(
+    defaultValues?.taxMode ?? 'amount'
+  );
 
   const periodOptions = React.useMemo<SelectInputOption[]>(
     () => [

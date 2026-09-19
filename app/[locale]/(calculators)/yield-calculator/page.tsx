@@ -1,6 +1,7 @@
 import { Wallet } from 'lucide-react';
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+import { Suspense } from 'react';
 import { yieldCalculatorMetadata } from '@/config/metadata';
 import { CalculatorPageHeader } from '@/components/common/calculator-page-header';
 import { YieldCalculatorClient } from '@/features/calculators/yield-calculator/yield-calculator-client';
@@ -29,7 +30,9 @@ export default async function YieldCalculatorPage({ params }: Props) {
         headline={t('headline')}
         description={t('description')}
       />
-      <YieldCalculatorClient />
+      <Suspense>
+        <YieldCalculatorClient />
+      </Suspense>
     </div>
   );
 }
