@@ -69,6 +69,7 @@ export function calcYield(values: YieldFormValues): NonNullable<YieldResult> {
     perMonth,
     perYear,
     selectedPeriod: period,
+    periodCount,
   };
 }
 
@@ -80,6 +81,41 @@ export function formatCurrency(value: number, locale: string): string {
   return new Intl.NumberFormat(toIntlLocale(locale), {
     maximumFractionDigits: 0,
   }).format(Math.round(value));
+}
+
+export function formatPeriod(
+  count: number,
+  period: Period,
+  locale: string,
+  preposition = false
+): string {
+  if (locale === 'ar') {
+    const forms: Record<Period, [string, string, string]> = {
+      day: ['يوم', 'يومين', 'أيام'],
+      month: ['شهر', 'شهرين', 'أشهر'],
+      year: ['سنة', 'سنتين', 'سنوات'],
+    };
+    const [one, two, many] = forms[period];
+    let formatted: string;
+    if (count === 0 || count === 1) formatted = `${count} ${one}`;
+    else if (count === 2) formatted = two;
+    else if (count <= 10) formatted = `${count} ${many}`;
+    else formatted = `${count} ${one}`;
+    return preposition ? `في ${formatted}` : formatted;
+  }
+
+  const singular: Record<Period, string> = {
+    day: 'day',
+    month: 'month',
+    year: 'year',
+  };
+  const plural: Record<Period, string> = {
+    day: 'days',
+    month: 'months',
+    year: 'years',
+  };
+  const formatted = `${count} ${count === 1 ? singular[period] : plural[period]}`;
+  return preposition ? `for ${formatted}` : formatted;
 }
 
 export function formatPercent(value: number): string {

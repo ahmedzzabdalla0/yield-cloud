@@ -1,20 +1,13 @@
 'use client';
 
-import { RefreshCw, Share2, TrendingUp } from 'lucide-react';
+import { Lock, RefreshCw, Share2 } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { toast } from 'sonner';
+import { cn } from '@/lib/utils';
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard';
 import { Badge } from '@/components/ui/bage';
 import { Button } from '@/components/ui/button';
-import {
-  ResultCard,
-  ResultCardEyebrow,
-  ResultCardFooter,
-  ResultCardHeader,
-  ResultCardStat,
-  ResultCardStats,
-} from '@/components/ui/result-card';
-import { formatCurrency, formatPercent } from './lib';
+import { formatCurrency, formatPercent, formatPeriod } from './lib';
 import type { YieldResult } from './types';
 
 type YieldCalculatorResultProps = {
@@ -38,82 +31,108 @@ export function YieldCalculatorResult({
   }
 
   return (
-    <ResultCard>
-      <ResultCardHeader>
+    <div className="bg-card flex flex-col overflow-hidden rounded-2xl border p-5">
+      {/* Header */}
+      <div className="flex flex-col items-center gap-3 text-center">
         <Badge variant="soft-brand" size="sm">
-          <TrendingUp />
+          <Lock />
           {t('badge')}
         </Badge>
-      </ResultCardHeader>
+        <p className="text-body-md text-muted-foreground">{t('returnLabel')}</p>
+      </div>
 
-      <div className="flex flex-col gap-1">
-        <p className="text-body-sm text-muted-foreground">{t('returnLabel')}</p>
-        <div className="flex flex-wrap items-baseline gap-1.5">
-          <span
-            className={`text-display-xl font-black${!result ? 'text-muted-foreground' : ''}`}
-          >
-            {result ? formatCurrency(result.netReturn, locale) : PLACEHOLDER}
-          </span>
-          <span className="text-body-md text-muted-foreground">
-            {t('unit')}
-          </span>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <ResultCardEyebrow>{t('gainLabel')}</ResultCardEyebrow>
-          <span
-            className={`text-body-sm font-semibold${result ? 'text-primary' : 'text-muted-foreground'}`}
-          >
-            {result
-              ? `${formatPercent(result.gainPercent)}%`
-              : `${PLACEHOLDER}%`}
-          </span>
+      {/* Yeild amount */}
+      <div className="flex flex-wrap items-baseline justify-center gap-2 py-4 pb-7">
+        <span
+          className={cn(
+            'text-display-2xl font-black',
+            !result && 'text-muted-foreground'
+          )}
+        >
+          {result ? formatCurrency(result.netReturn, locale) : PLACEHOLDER}
+        </span>
+        <span className="text-heading-md text-muted-foreground">
+          {t('unit')}
+        </span>
+      </div>
+
+      {/* Gain section */}
+      <div className="bg-brand-50 border-brand-100 rounded-xl border p-4">
+        <div className="flex items-end justify-between gap-4">
+          <div className="flex flex-col gap-1">
+            <span className="text-body-lg text-muted-foreground">
+              {t('gainLabel')}
+            </span>
+            <span className="text-body-lg text-foreground font-bold">
+              {result
+                ? formatPeriod(
+                    result.periodCount,
+                    result.selectedPeriod,
+                    locale,
+                    true
+                  )
+                : formatPeriod(0, 'day', locale)}
+            </span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span
+              className={cn(
+                'text-heading-lg text-brand-800 font-black',
+                !result && 'text-brand-900/80'
+              )}
+            >
+              {result
+                ? `${formatPercent(result.gainPercent)}%`
+                : `${PLACEHOLDER}%`}
+            </span>
+          </div>
         </div>
       </div>
 
-      <ResultCardStats>
-        <ResultCardStat
-          label={t('perDay')}
-          value={
-            result
-              ? `${formatCurrency(result.perDay, locale)} ${t('currencyUnit')}`
-              : PLACEHOLDER
-          }
-          sublabel={t('periodDay')}
-        />
-        <ResultCardStat
-          label={t('perMonth')}
-          value={
-            result
-              ? `${formatCurrency(result.perMonth, locale)} ${t('currencyUnit')}`
-              : PLACEHOLDER
-          }
-          sublabel={t('periodMonth')}
-        />
-        <ResultCardStat
-          label={t('perYear')}
-          value={
-            result
-              ? `${formatCurrency(result.perYear, locale)} ${t('currencyUnit')}`
-              : PLACEHOLDER
-          }
-          sublabel={t('periodYear')}
-        />
-      </ResultCardStats>
+      {/* Stats */}
+      <div className="my-9 grid grid-cols-2 sm:grid-cols-3">
+        {(
+          [
+            { label: t('perDay'), value: result?.perDay, prefix: '~ ' },
+            { label: t('perMonth'), value: result?.perMonth, prefix: '' },
+            { label: t('perYear'), value: result?.perYear, prefix: '' },
+          ] as const
+        ).map(({ label, value, prefix }, i, arr) => (
+          <div
+            key={label}
+            className={cn(
+              'flex flex-col items-center gap-0.5 p-4',
+              i === 0 &&
+                'col-span-2 border-b pt-0 sm:col-span-1 sm:border-b-0 sm:pt-4',
+              i < arr.length - 1 && 'sm:border-e',
+              i === 1 && 'border-e'
+            )}
+          >
+            <span className="text-body-sm text-muted-foreground">{label}</span>
+            <span className="text-heading-sm font-semibold">
+              {value != null
+                ? `${prefix}${formatCurrency(value, locale)} ${t('currencyUnit')}`
+                : PLACEHOLDER}
+            </span>
+          </div>
+        ))}
+      </div>
 
-      <ResultCardFooter className="justify-start">
+      {/* Footer */}
+      <div className="flex items-center gap-2">
         <Button
           variant="default"
-          size="default"
+          size="lg"
           onClick={handleShare}
           disabled={!result}
-          className="h-fit gap-1.5 py-2"
+          className="h-fit flex-1 gap-1.5 py-2"
         >
-          <Share2 className="size-3.5" />
+          <Share2 className="size-4" />
           {t('share')}
         </Button>
         <Button
           variant="outline"
-          size="default"
+          size="lg"
           onClick={onReset}
           disabled={!result}
           className="h-fit gap-1.5 py-2"
@@ -121,7 +140,7 @@ export function YieldCalculatorResult({
           <RefreshCw className="size-3.5" />
           {t('reset')}
         </Button>
-      </ResultCardFooter>
-    </ResultCard>
+      </div>
+    </div>
   );
 }

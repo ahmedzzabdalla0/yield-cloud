@@ -20,4 +20,5 @@ export type YieldResult = {
   perMonth: number;
   perYear: number;
   selectedPeriod: Period;
+  periodCount: number;
 } | null;

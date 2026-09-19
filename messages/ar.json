@@ -44,17 +44,24 @@
       },
       "result": {
         "badge": "العائد على الاستثمار",
-        "returnLabel": "هتكسب بعد الضريبة",
-        "gainLabel": "نسبة الربح من رأس المال:",
-        "unit": "جنيه مصري",
+        "returnLabel": "صافي أرباحك المتوقعة بعد خصم الضرائب",
+        "gainLabel": "نسبة الربح من رأس المال",
+        "periodReturnLabel": "العائد الشهري الصافي",
+        "periodReturnSublabel": "كل 30 يوم",
+        "period": {
+          "day": "يوم",
+          "month": "شهر",
+          "year": "سنة"
+        },
+        "unit": "جنيه",
         "currencyUnit": "ج.م",
-        "perDay": "يومياً",
-        "perMonth": "شهرياً",
-        "perYear": "سنوياً",
+        "perDay": "المعادل باليوم",
+        "perMonth": "المعادل بالشهر",
+        "perYear": "العائد السنوي الإجمالي",
         "periodDay": "كل 24 ساعة",
         "periodMonth": "كل شهر",
         "periodYear": "كل سنة",
-        "reset": "إعادة",
+        "reset": "إعادة ضبط",
         "share": "مشاركة الحسبة",
         "shareToast": "تم نسخ رابط الحسبة"
       }
