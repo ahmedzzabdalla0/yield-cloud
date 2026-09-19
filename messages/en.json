@@ -1,4 +1,13 @@
 {
+  "nav": {
+    "yieldCalculator": "Yield Calculator",
+    "yieldCalculatorShort": "Yield",
+    "capitalCalculator": "Capital Calculator",
+    "capitalCalculatorShort": "Capital",
+    "goalCalculator": "Financial Goal",
+    "goalCalculatorShort": "Goal",
+    "about": "About Us"
+  },
   "metadata": {
     "yieldCalculator": {
       "title": "Yield Calculator | Yield Cloud",

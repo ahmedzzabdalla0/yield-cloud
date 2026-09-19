@@ -161,7 +161,7 @@ function ResultCardProgress({
       {(startLabel || endLabel) && (
         <div
           className={cn(
-            'flex items-center justify-between text-body-sm',
+            'text-body-sm flex items-center justify-between',
             variant === 'brand'
               ? 'text-primary-foreground/70'
               : 'text-muted-foreground'

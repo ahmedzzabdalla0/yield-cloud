@@ -1,4 +1,13 @@
 {
+  "nav": {
+    "yieldCalculator": "حساب العائد",
+    "yieldCalculatorShort": "العائد",
+    "capitalCalculator": "رأس المال",
+    "capitalCalculatorShort": "رأس المال",
+    "goalCalculator": "الهدف المالي",
+    "goalCalculatorShort": "الهدف",
+    "about": "من إحنا"
+  },
   "metadata": {
     "yieldCalculator": {
       "title": "حساب العائد | غيمة العائد",

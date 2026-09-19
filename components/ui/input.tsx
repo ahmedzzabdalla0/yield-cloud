@@ -10,7 +10,7 @@ function Input({ className, type, ...props }: React.ComponentProps<'input'>) {
       type={type}
       data-slot="input"
       className={cn(
-        'flex h-11 w-full min-w-0 rounded-md border border-input bg-background px-3 text-body-md text-foreground shadow-xs transition-[color,box-shadow] outline-none placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40',
+        'border-input bg-background text-body-md text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 flex h-11 w-full min-w-0 rounded-md border px-3 shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-3 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:ring-3',
         className
       )}
       {...props}
@@ -50,7 +50,7 @@ function AmountInput({
             {label}
           </label>
           {required && (
-            <span className="rounded-full bg-muted px-2 py-0.5 text-caption-xs text-muted-foreground">
+            <span className="bg-muted text-caption-xs text-muted-foreground rounded-full px-2 py-0.5">
               مطلوب
             </span>
           )}
@@ -58,13 +58,13 @@ function AmountInput({
       )}
       <div
         className={cn(
-          'flex h-11 items-center overflow-hidden rounded-md border border-input bg-background shadow-xs transition-colors focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/50',
+          'border-input bg-background focus-within:border-ring focus-within:ring-ring/50 flex h-11 items-center overflow-hidden rounded-md border shadow-xs transition-colors focus-within:ring-3',
           invalid &&
-            'border-destructive focus-within:border-destructive focus-within:ring-3 focus-within:ring-destructive/20'
+            'border-destructive focus-within:border-destructive focus-within:ring-destructive/20 focus-within:ring-3'
         )}
       >
         {prefix && (
-          <span className="flex h-full shrink-0 items-center border-e border-border bg-muted px-3 text-body-sm text-muted-foreground">
+          <span className="border-border bg-muted text-body-sm text-muted-foreground flex h-full shrink-0 items-center border-e px-3">
             {prefix}
           </span>
         )}
@@ -75,13 +75,13 @@ function AmountInput({
           {...props}
         />
         {suffix && (
-          <span className="flex h-full shrink-0 items-center px-3 text-body-sm text-muted-foreground">
+          <span className="text-body-sm text-muted-foreground flex h-full shrink-0 items-center px-3">
             {suffix}
           </span>
         )}
       </div>
       {errorText ? (
-        <p className="flex items-center gap-1 text-body-sm text-destructive">
+        <p className="text-body-sm text-destructive flex items-center gap-1">
           <AlertCircle className="size-3.5" />
           {errorText}
         </p>
