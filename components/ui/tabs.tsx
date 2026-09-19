@@ -1,7 +1,7 @@
 'use client';
 
-import * as TabsPrimitive from '@radix-ui/react-tabs';
 import { Slottable } from '@radix-ui/react-slot';
+import * as TabsPrimitive from '@radix-ui/react-tabs';
 import { cn } from 'cn';
 import * as React from 'react';
 

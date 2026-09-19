@@ -1,8 +1,8 @@
 'use client';
 
+import { Link, usePathname } from '@/i18n/navigation';
 import { CircleDollarSign, Target, Wallet } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { Link, usePathname } from '@/i18n/navigation';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 type CalculatorTabsProps = {

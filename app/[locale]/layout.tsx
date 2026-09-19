@@ -4,9 +4,9 @@ import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { cn } from '@/lib/utils';
+import { CalculatorTabs } from '@/components/common/calculator-tabs';
 import { Header } from '@/components/common/header';
 import '../globals.css';
-import { CalculatorTabs } from '@/components/common/calculator-tabs';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
