@@ -1,36 +1,194 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+
+<img src="public/assets/svgs/logo.svg" alt="Yield Cloud Logo" width="72" height="72" />
+
+# غيمة العائد — Yield Cloud
+
+**Egyptian financial calculators for smarter investment decisions.**
+
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js)](https://nextjs.org)
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://typescriptlang.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
+
+[🌐 Live Demo](https://yieldcloud.ahmedabdelsalam.dev) · [👤 Portfolio](https://ahmedabdelsalam.dev)
+
+</div>
+
+---
+
+## Overview
+
+Yield Cloud is an independent Egyptian financial platform that helps users make smarter investment decisions through transparent, accessible calculators. It provides instant results for yield and capital planning — with full Arabic/English support, shareable links, and a clean mobile-first UI.
+
+---
+
+## Calculators
+
+### Yield Calculator — حاسبة العائد
+
+> _How much will you earn on your investment?_
+
+Input your principal, annual yield rate (APY), and investment period. Receive a full breakdown of net return after tax, daily/monthly/yearly equivalents, and gain percentage relative to principal.
+
+### Capital Calculator — حاسبة رأس المال
+
+> _How much do you need to invest to hit your target return?_
+
+The reverse of the yield calculator. Enter your target return, APY, and period — the calculator derives the exact required capital using an inverse daily-rate model.
+
+---
+
+## Features
+
+- **Bilingual** — Full Arabic (RTL) and English (LTR) support via `next-intl`
+- **Shareable links** — Form state is base64-encoded into the URL on every calculation, enabling one-click sharing with pre-filled results
+- **Input limits** — Hard caps on all numeric fields prevent nonsensical inputs at the hook level
+- **Smart number formatting** — Currency auto-compacts to `1.5M` / `2.3B` for large values; standard thousands separator below 1M
+- **Form validation** — Field-level error messages appear on submit and clear on edit, with a fully generic validation hook
+- **Responsive** — Mobile-first grid layout; calculator tabs adapt between mobile (compact) and desktop (full labels with icons)
+- **ISR** — Pages revalidate automatically at the start of each new year (dynamic `revalidate` computed at build time)
+
+---
+
+## Tech Stack
+
+| Layer         | Technology                                                                                                                     |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Framework     | [Next.js 16](https://nextjs.org) (App Router)                                                                                  |
+| Language      | [TypeScript 5](https://typescriptlang.org)                                                                                     |
+| UI Library    | [React 19](https://react.dev)                                                                                                  |
+| Styling       | [Tailwind CSS v4](https://tailwindcss.com)                                                                                     |
+| Components    | [shadcn/ui](https://ui.shadcn.com) · [Radix UI](https://radix-ui.com) · [Base UI](https://base-ui.com)                         |
+| Icons         | [Lucide React](https://lucide.dev)                                                                                             |
+| i18n          | [next-intl 4](https://next-intl-docs.vercel.app)                                                                               |
+| Notifications | [Sonner](https://sonner.emilkowal.ski)                                                                                         |
+| Linting       | [ESLint 9](https://eslint.org) · [eslint-config-next](https://nextjs.org/docs/app/api-reference/config/eslint)                 |
+| Formatting    | [Prettier 3](https://prettier.io) · [prettier-plugin-tailwindcss](https://github.com/tailwindlabs/prettier-plugin-tailwindcss) |
+| Git Hooks     | [Husky](https://typicode.github.io/husky)                                                                                      |
+
+---
+
+## Project Structure
+
+```
+yield-cloud/
+├── app/
+│   └── [locale]/
+│       ├── layout.tsx                    # Root layout with ISR revalidation
+│       └── (calculators)/
+│           ├── yield-calculator/
+│           └── capital-calculator/
+├── features/
+│   └── calculators/
+│       ├── shared/                       # Reusable shells
+│       │   ├── calculator-client-shell.tsx
+│       │   ├── calculator-form-card.tsx
+│       │   └── calculator-result-card.tsx
+│       ├── yield-calculator/             # Yield feature
+│       └── capital-calculator/           # Capital feature
+├── hooks/
+│   ├── use-numeric-input.ts              # Controlled financial input
+│   ├── use-form-validation.ts            # Generic field validation
+│   └── use-calculator-url-state.ts       # URL state encode/decode
+├── lib/
+│   ├── formatters.ts                     # Currency, percent, period formatting
+│   ├── calculator-types.ts               # Shared domain types
+│   └── revalidate.ts                     # ISR helper
+├── components/
+│   ├── common/                           # Header, Footer, Calculator tabs
+│   └── ui/                               # Design system components
+├── config/
+│   └── metadata/                         # Per-page SEO metadata
+├── messages/
+│   ├── ar.json                           # Arabic translations
+│   └── en.json                           # English translations
+└── i18n/                                 # next-intl routing config
+```
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 20+
+- npm / yarn / pnpm
+
+### Installation
+
+```bash
+git clone https://github.com/ahmedabdelsalam/yield-cloud.git
+cd yield-cloud
+npm install
+```
+
+### Environment Variables
+
+```bash
+cp .env.example .env.local
+```
+
+| Variable               | Description                                          |
+| ---------------------- | ---------------------------------------------------- |
+| `NEXT_PUBLIC_BASE_URL` | Production base URL (used for canonical and OG URLs) |
+
+### Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Build
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm run start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Lint & Format
 
-## Learn More
+```bash
+npm run lint
+npm run format
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## i18n
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The app supports two locales:
 
-## Deploy on Vercel
+| Locale                     | URL                    | Direction |
+| -------------------------- | ---------------------- | --------- |
+| Arabic (default for Egypt) | `/ar/yield-calculator` | RTL       |
+| English                    | `/yield-calculator`    | LTR       |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Locale prefix uses `as-needed` — English routes have no prefix, Arabic routes are prefixed with `/ar`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Architecture Decisions
+
+**Shareable URL state** — On every calculation submit, `YieldFormValues` is `JSON.stringify`d, `encodeURIComponent`d, and `btoa`d into a single `?s=` query param. The client reads and validates this param on mount, pre-filling the form and computing the result immediately — no server round-trip needed.
+
+**Generic calculator shells** — The `shared/` folder contains three reusable shells (`CalculatorClientShell`, `CalculatorFormCard`, `CalculatorResultCard`) that handle layout, gradient styling, stats grid, share/reset footer, and clipboard copy. Each calculator only defines its domain logic (types, formula, fields) and composes these shells.
+
+**Input-level max enforcement** — The `useNumericInput` hook accepts a `max` option that silently rejects keystrokes exceeding the limit, preventing astronomical inputs before they reach validation.
+
+**ISR with yearly revalidation** — `getSecondsUntilNextYear()` computes the exact seconds until UTC midnight on Jan 1st at build time, used as the `revalidate` export — ensuring the copyright year in the footer refreshes automatically with no manual deploy.
+
+---
+
+## License
+
+[MIT](LICENSE) © 2025 [Ahmed Abdelsalam](https://ahmedabdelsalam.dev)
+
+---
+
+<div align="center">
+
+Developed by [Ahmed Abdelsalam](https://ahmedabdelsalam.dev)
+
+</div>

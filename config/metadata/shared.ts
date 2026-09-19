@@ -1,4 +1,5 @@
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://yieldcloud.com';
+const BASE_URL =
+  process.env.NEXT_PUBLIC_BASE_URL ?? 'https://yieldcloud.ahmedabdelsalam.dev';
 
 export const shared = {
   baseUrl: BASE_URL,
