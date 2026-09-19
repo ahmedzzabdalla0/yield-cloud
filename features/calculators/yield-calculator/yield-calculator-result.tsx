@@ -100,26 +100,26 @@ export function YieldCalculatorResult({
         />
       </ResultCardStats>
 
-      <ResultCardFooter>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={onReset}
-          disabled={!result}
-          className="gap-1.5"
-        >
-          <RefreshCw className="size-3.5" />
-          {t('reset')}
-        </Button>
+      <ResultCardFooter className="justify-start">
         <Button
           variant="default"
-          size="sm"
+          size="default"
           onClick={handleShare}
           disabled={!result}
-          className="gap-1.5"
+          className="h-fit gap-1.5 py-2"
         >
           <Share2 className="size-3.5" />
           {t('share')}
+        </Button>
+        <Button
+          variant="outline"
+          size="default"
+          onClick={onReset}
+          disabled={!result}
+          className="h-fit gap-1.5 py-2"
+        >
+          <RefreshCw className="size-3.5" />
+          {t('reset')}
         </Button>
       </ResultCardFooter>
     </ResultCard>

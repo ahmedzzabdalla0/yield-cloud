@@ -12,18 +12,26 @@ const {
 
 export const yieldCalculatorMetadata: LocaleMetadata = {
   ar: {
-    title: 'حساب العائد | غيمة العائد',
+    title: 'حاسبة العائد على الاستثمار | غيمة العائد',
     description:
-      'احسب رأس المال اللي محتاجه عشان تعيش من العائد. حدد دخلك الشهري وهنحسبلك المبلغ اللي تحتاجه في البنك أو الصندوق الاستثماري.',
+      'احسب عائدك على أي استثمار في ثوانٍ. أدخل رأس المال والفائدة السنوية ومدة الاستثمار وهنحسبلك المكسب بعد الضريبة مع تفاصيل يومية وشهرية وسنوية.',
     applicationName,
     authors,
     creator,
     publisher,
-    keywords: keywords.ar,
+    keywords: [
+      ...keywords.ar,
+      'حاسبة عائد استثمار',
+      'ربح على الاستثمار',
+      'فائدة بنكية',
+      'صناديق استثمار',
+      'حساب الفائدة',
+      'عائد سنوي',
+    ],
     openGraph: {
-      title: 'حاسبة الاستقلال المالي ورأس المال | غيمة العائد',
+      title: 'حاسبة العائد على الاستثمار | غيمة العائد',
       description:
-        'محتاج رأس مال كام عشان تعيش من العائد؟ احسب المبلغ الإجمالي المطلوب بناءً على دخلك الشهري ومعدل الفائدة السنوية.',
+        'هتكسب كام على استثمارك؟ أدخل رأس المال والفائدة السنوية والمدة وهنحسبلك العائد الكامل بعد الضريبة — باليوم والشهر والسنة.',
       url: `${baseUrl}/ar/yield-calculator`,
       siteName: 'غيمة العائد',
       locale: 'ar_EG',
@@ -31,46 +39,55 @@ export const yieldCalculatorMetadata: LocaleMetadata = {
     },
     twitter: {
       ...twitter,
-      title: 'حاسبة الاستقلال المالي | غيمة العائد',
-      description: 'احسب رأس المال اللي هتحتاجه عشان تعيش من عائد استثماراتك.',
+      title: 'حاسبة العائد على الاستثمار | غيمة العائد',
+      description:
+        'احسب عائدك على أي استثمار بعد الضريبة مع تفاصيل يومية وشهرية وسنوية.',
     },
     alternates: {
       canonical: `${baseUrl}/ar/yield-calculator`,
       languages: {
         'ar-EG': `${baseUrl}/ar/yield-calculator`,
-        'en-US': `${baseUrl}/en/yield-calculator`,
+        'en-US': `${baseUrl}/yield-calculator`,
       },
     },
   },
   en: {
-    title: 'Yield Calculator | Yield Cloud',
+    title: 'Investment Return Calculator | Yield Cloud',
     description:
-      'Calculate the capital you need to live off your investment returns. Set your target monthly income and find out how much you need in a bank or investment fund.',
+      'Calculate your investment return in seconds. Enter your principal, annual yield rate, and period — we show your net gain after tax with a full daily, monthly, and yearly breakdown.',
     applicationName,
     authors,
     creator,
     publisher,
-    keywords: keywords.en,
+    keywords: [
+      ...keywords.en,
+      'investment return calculator',
+      'ROI calculator',
+      'interest calculator',
+      'net return after tax',
+      'annual yield',
+      'bank deposit calculator',
+    ],
     openGraph: {
-      title: 'Financial Independence & Capital Calculator | Yield Cloud',
+      title: 'Investment Return Calculator | Yield Cloud',
       description:
-        'How much capital do you need to live off your returns? Calculate the total amount required based on your monthly income target and expected APY.',
-      url: `${baseUrl}/en/yield-calculator`,
+        'How much will you earn on your investment? Enter your capital, APY, and duration — get your full net return breakdown instantly.',
+      url: `${baseUrl}/yield-calculator`,
       siteName: 'Yield Cloud',
       locale: 'en_US',
       type: 'website',
     },
     twitter: {
       ...twitter,
-      title: 'Yield Calculator | Yield Cloud',
+      title: 'Investment Return Calculator | Yield Cloud',
       description:
-        'Calculate how much capital you need to live off your investment returns.',
+        'Calculate your net investment return after tax — daily, monthly, and yearly breakdown.',
     },
     alternates: {
-      canonical: `${baseUrl}/en/yield-calculator`,
+      canonical: `${baseUrl}/yield-calculator`,
       languages: {
         'ar-EG': `${baseUrl}/ar/yield-calculator`,
-        'en-US': `${baseUrl}/en/yield-calculator`,
+        'en-US': `${baseUrl}/yield-calculator`,
       },
     },
   },
