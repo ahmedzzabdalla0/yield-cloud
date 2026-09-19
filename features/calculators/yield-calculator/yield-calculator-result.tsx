@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/result-card';
 import { formatCurrency, formatPercent } from './lib';
 import type { YieldResult } from './types';
+import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard';
 
 type YieldCalculatorResultProps = {
   result: YieldResult;
@@ -29,11 +30,11 @@ export function YieldCalculatorResult({
 }: YieldCalculatorResultProps) {
   const t = useTranslations('pages.yieldCalculator.result');
   const locale = useLocale();
+  const { copy } = useCopyToClipboard();
 
-  function handleShare() {
-    navigator.clipboard.writeText(window.location.href).then(() => {
-      toast.success(t('shareToast'));
-    });
+  async function handleShare() {
+    const success = await copy(window.location.href);
+    if (success) toast.success(t('shareToast'));
   }
 
   return (
