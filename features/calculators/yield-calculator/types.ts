@@ -18,4 +18,4 @@ export type YieldResult = {
   perYear: number;
   selectedPeriodReturn: number;
   selectedPeriod: Period;
-};
+} | null;

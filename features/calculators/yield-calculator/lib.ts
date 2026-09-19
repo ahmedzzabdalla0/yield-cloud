@@ -2,15 +2,6 @@ import type { Period, TaxMode, YieldFormValues, YieldResult } from './types';
 
 export const YIELD_CALC_PARAM_KEY = 's';
 
-export const YIELD_CALC_DEFAULT_VALUES: YieldFormValues = {
-  monthlyIncome: 15_000,
-  apy: 24,
-  period: 'day',
-  periodCount: 24,
-  taxMode: 'amount',
-  taxValue: 0,
-};
-
 const VALID_PERIODS: Period[] = ['day', 'month', 'year'];
 const VALID_TAX_MODES: TaxMode[] = ['amount', 'percentage'];
 

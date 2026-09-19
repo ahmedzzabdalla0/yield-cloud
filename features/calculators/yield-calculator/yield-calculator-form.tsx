@@ -28,22 +28,22 @@ export function YieldCalculatorForm({
   const locale = useLocale();
 
   const monthlyIncome = useNumericInput({
-    initial: defaultValues?.monthlyIncome ?? 15_000,
+    initial: defaultValues?.monthlyIncome,
     allowFloat: false,
     locale,
   });
   const apy = useNumericInput({
-    initial: defaultValues?.apy ?? 24,
+    initial: defaultValues?.apy,
     allowFloat: true,
     locale,
   });
   const periodCount = useNumericInput({
-    initial: defaultValues?.periodCount ?? 24,
+    initial: defaultValues?.periodCount,
     allowFloat: false,
     locale,
   });
   const taxValue = useNumericInput({
-    initial: defaultValues?.taxValue ?? 0,
+    initial: defaultValues?.taxValue,
     allowFloat: true,
     locale,
   });
@@ -120,6 +120,7 @@ export function YieldCalculatorForm({
         inputValue={periodCount.value}
         onInputChange={periodCount.onChange}
         inputMode="numeric"
+        placeholder={t('period.placeholder')}
         selectValue={period}
         onSelectChange={(v) => setPeriod(v as Period)}
         options={periodOptions}
@@ -130,7 +131,7 @@ export function YieldCalculatorForm({
         inputValue={taxValue.value}
         onInputChange={taxValue.onChange}
         inputMode="decimal"
-        placeholder="0"
+        placeholder={t('tax.placeholder')}
         selectValue={taxMode}
         onSelectChange={(v) => {
           setTaxMode(v as TaxMode);

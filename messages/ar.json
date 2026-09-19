@@ -18,7 +18,7 @@
         "sectionLabel": "حدد هدفك الشهري",
         "monthlyIncome": {
           "label": "عايز تتصرف كام في الشهر؟",
-          "placeholder": "اكتب الرقم أو تحرك المؤشر",
+          "placeholder": "الدخل الشهري المستهدف",
           "suffix": "جنيه / شهرياً"
         },
         "apy": {
@@ -28,12 +28,14 @@
         },
         "period": {
           "label": "عايز تحسب العائد في فترة ادايه؟",
+          "placeholder": "عدد الفترات",
           "day": "يوم",
           "month": "شهر",
           "year": "سنة"
         },
         "tax": {
           "label": "عايز تخصم ضريبة من العائد؟",
+          "placeholder": "قيمة الضريبة",
           "modeAmount": "جنيه",
           "modePercentage": "نسبة مئوية",
           "placeholderAmount": "0",

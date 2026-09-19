@@ -18,7 +18,7 @@
         "sectionLabel": "Set your monthly goal",
         "monthlyIncome": {
           "label": "How much do you want to spend per month?",
-          "placeholder": "Enter amount or drag the slider",
+          "placeholder": "Target monthly income",
           "suffix": "EGP / month"
         },
         "apy": {
@@ -28,12 +28,14 @@
         },
         "period": {
           "label": "Which period do you want to calculate returns for?",
+          "placeholder": "Number of periods",
           "day": "Day",
           "month": "Month",
           "year": "Year"
         },
         "tax": {
           "label": "Do you want to deduct tax from the return?",
+          "placeholder": "Tax amount",
           "modeAmount": "EGP",
           "modePercentage": "Percentage",
           "placeholderAmount": "0",

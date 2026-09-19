@@ -1,13 +1,12 @@
 'use client';
 
-import { useRouter, useSearchParams } from 'next/navigation';
 import * as React from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import {
-  YIELD_CALC_DEFAULT_VALUES,
-  YIELD_CALC_PARAM_KEY,
   calcYield,
   decodeYieldFormValues,
   encodeYieldFormValues,
+  YIELD_CALC_PARAM_KEY,
 } from './lib';
 import type { YieldFormValues, YieldResult } from './types';
 import { YieldCalculatorForm } from './yield-calculator-form';
@@ -17,17 +16,14 @@ export function YieldCalculatorClient() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const initialValues = React.useMemo<YieldFormValues>(() => {
+  const initialValues = React.useMemo<YieldFormValues | null>(() => {
     const encoded = searchParams.get(YIELD_CALC_PARAM_KEY);
-    if (encoded) {
-      const decoded = decodeYieldFormValues(encoded);
-      if (decoded) return decoded;
-    }
-    return YIELD_CALC_DEFAULT_VALUES;
+    if (encoded) return decodeYieldFormValues(encoded);
+    return null;
   }, [searchParams]);
 
   const [result, setResult] = React.useState<YieldResult>(() =>
-    calcYield(initialValues)
+    initialValues ? calcYield(initialValues) : null
   );
 
   function handleSubmit(values: YieldFormValues) {
@@ -38,7 +34,7 @@ export function YieldCalculatorClient() {
   }
 
   function handleReset() {
-    setResult(calcYield(YIELD_CALC_DEFAULT_VALUES));
+    setResult(null);
     const params = new URLSearchParams(searchParams.toString());
     params.delete(YIELD_CALC_PARAM_KEY);
     const query = params.toString();
@@ -55,7 +51,7 @@ export function YieldCalculatorClient() {
       <div className="order-1">
         <YieldCalculatorForm
           onSubmit={handleSubmit}
-          defaultValues={initialValues}
+          defaultValues={initialValues ?? undefined}
         />
       </div>
     </div>

@@ -20,6 +20,8 @@ type YieldCalculatorResultProps = {
   onReset: () => void;
 };
 
+const PLACEHOLDER = '00.0';
+
 function periodReturnLabel(
   period: Period,
   t: ReturnType<typeof useTranslations>
@@ -36,26 +38,17 @@ export function YieldCalculatorResult({
   const t = useTranslations('pages.yieldCalculator.result');
   const locale = useLocale();
 
-  const {
-    principal,
-    perDay,
-    perMonth,
-    perYear,
-    selectedPeriodReturn,
-    selectedPeriod,
-  } = result;
-
   function handleShare() {
     if (typeof navigator !== 'undefined' && navigator.share) {
       navigator.share({
         title: t('badge'),
-        text: `${t('badge')}: ${formatCurrency(principal, locale)} ${t('unit')}`,
+        text: result
+          ? `${t('badge')}: ${formatCurrency(result.principal, locale)} ${t('unit')}`
+          : t('badge'),
         url: window.location.href,
       });
     } else {
-      navigator.clipboard.writeText(
-        `${t('badge')}: ${formatCurrency(principal, locale)} ${t('unit')} — ${window.location.href}`
-      );
+      navigator.clipboard.writeText(window.location.href);
     }
   }
 
@@ -71,8 +64,10 @@ export function YieldCalculatorResult({
       <div className="flex flex-col gap-1">
         <p className="text-body-sm text-muted-foreground">{t('hint')}</p>
         <div className="flex flex-wrap items-baseline gap-1.5">
-          <span className="text-display-xl font-black">
-            {formatCurrency(principal, locale)}
+          <span
+            className={`text-display-xl font-black${!result ? 'text-muted-foreground' : ''}`}
+          >
+            {result ? formatCurrency(result.principal, locale) : PLACEHOLDER}
           </span>
           <span className="text-body-md text-muted-foreground">
             {t('unit')}
@@ -84,14 +79,20 @@ export function YieldCalculatorResult({
       <div className="flex flex-col gap-2">
         <div className="flex items-center justify-between">
           <ResultCardEyebrow>{t('returnLabel')}</ResultCardEyebrow>
-          <Badge variant="outline" size="sm">
-            {periodReturnLabel(selectedPeriod, t)}
-          </Badge>
+          {result && (
+            <Badge variant="outline" size="sm">
+              {periodReturnLabel(result.selectedPeriod, t)}
+            </Badge>
+          )}
         </div>
 
         <div className="flex items-baseline gap-2">
-          <span className="text-display-xl text-primary font-bold">
-            {formatCurrency(selectedPeriodReturn, locale)}
+          <span
+            className={`text-display-xl font-bold${result ? 'text-primary' : 'text-muted-foreground'}`}
+          >
+            {result
+              ? formatCurrency(result.selectedPeriodReturn, locale)
+              : PLACEHOLDER}
           </span>
           <span className="text-body-md text-muted-foreground">
             {t('unit')}
@@ -102,17 +103,29 @@ export function YieldCalculatorResult({
       <ResultCardStats>
         <ResultCardStat
           label={t('perDay')}
-          value={`${formatCurrency(perDay, locale)} ${t('currencyUnit')}`}
+          value={
+            result
+              ? `${formatCurrency(result.perDay, locale)} ${t('currencyUnit')}`
+              : PLACEHOLDER
+          }
           sublabel={t('periodDay')}
         />
         <ResultCardStat
           label={t('perMonth')}
-          value={`${formatCurrency(perMonth, locale)} ${t('currencyUnit')}`}
+          value={
+            result
+              ? `${formatCurrency(result.perMonth, locale)} ${t('currencyUnit')}`
+              : PLACEHOLDER
+          }
           sublabel={t('periodMonth')}
         />
         <ResultCardStat
           label={t('perYear')}
-          value={`${formatCurrency(perYear, locale)} ${t('currencyUnit')}`}
+          value={
+            result
+              ? `${formatCurrency(result.perYear, locale)} ${t('currencyUnit')}`
+              : PLACEHOLDER
+          }
           sublabel={t('periodYear')}
         />
       </ResultCardStats>
@@ -122,6 +135,7 @@ export function YieldCalculatorResult({
           variant="outline"
           size="sm"
           onClick={onReset}
+          disabled={!result}
           className="gap-1.5"
         >
           <RefreshCw className="size-3.5" />
@@ -131,6 +145,7 @@ export function YieldCalculatorResult({
           variant="default"
           size="sm"
           onClick={handleShare}
+          disabled={!result}
           className="gap-1.5"
         >
           <Share2 className="size-3.5" />
