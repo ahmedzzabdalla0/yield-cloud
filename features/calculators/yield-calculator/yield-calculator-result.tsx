@@ -31,7 +31,13 @@ export function YieldCalculatorResult({
   }
 
   return (
-    <div className="bg-card flex flex-col overflow-hidden rounded-2xl border p-5">
+    <div
+      className="bg-card flex flex-col overflow-hidden rounded-2xl border p-5"
+      style={{
+        background:
+          'linear-gradient(to bottom, color-mix(in oklch, var(--color-brand-500) 8%, transparent) 0%, var(--color-card) 30%)',
+      }}
+    >
       {/* Header */}
       <div className="flex flex-col items-center gap-3 text-center">
         <Badge variant="soft-brand" size="sm">

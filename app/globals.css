@@ -43,8 +43,6 @@
 
   --breakpoint-tablet: 900px;
 
-  --container-app: 1400px;
-
   --color-brand-50: #ecfdf5;
   --color-brand-100: #d1fae5;
   --color-brand-300: #6ee7b7;
@@ -144,6 +142,13 @@
     #f0fdf4 0%,
     #ffffff 20%
   );
+}
+
+@utility max-w-app {
+  max-width: 800px;
+  @media (min-width: 1024px) {
+    max-width: 1400px;
+  }
 }
 
 :root {

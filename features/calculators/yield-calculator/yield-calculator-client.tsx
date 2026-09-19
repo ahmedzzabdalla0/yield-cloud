@@ -50,7 +50,7 @@ export function YieldCalculatorClient() {
 
   return (
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-start">
-      <div className="order-2">
+      <div className="order-2 lg:max-w-130">
         <YieldCalculatorResult result={result} onReset={handleReset} />
       </div>
       <div className="order-1">
