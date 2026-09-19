@@ -1,5 +1,6 @@
 export type FormatLocale = string;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function toIntlLocale(_locale: FormatLocale): string {
   return 'en-US';
 }

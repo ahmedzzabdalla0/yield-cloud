@@ -15,6 +15,7 @@ const eslintConfig = defineConfig([
     },
     rules: {
       'tailwindcss/classnames-order': 'off',
+      'tailwindcss/no-custom-classname': 'off',
     },
   },
   globalIgnores([

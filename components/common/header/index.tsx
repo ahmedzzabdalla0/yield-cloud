@@ -1,14 +1,10 @@
 'use client';
 
-import { Link } from '@/i18n/navigation';
-import { useTranslations } from 'next-intl';
 import { CalculatorTabs } from '@/components/common/calculator-tabs';
 import { LocaleSwitcher } from './locale-switcher';
 import { Logo } from './logo';
 
 export function Header() {
-  const t = useTranslations('nav');
-
   return (
     <header className="border-border/60 bg-slate-25 w-full border-b">
       <div className="max-w-app mx-auto flex h-16 items-center justify-between gap-3 px-4">
