@@ -6,6 +6,7 @@ import { getMessages } from 'next-intl/server';
 import { layoutMetadata } from '@/config/metadata';
 import { cn } from '@/lib/utils';
 import { Toaster } from '@/components/ui/sonner';
+import { ClarityInit } from '@/components/common/clarity';
 import { CalculatorsMobileBar } from '@/components/common/calculators-mobile-bar';
 import { Footer } from '@/components/common/footer';
 import { Header } from '@/components/common/header';
@@ -47,6 +48,9 @@ export default async function RootLayout({ children, params }: Props) {
       dir={dir}
     >
       <body className="flex min-h-full flex-col bg-slate-50">
+        <ClarityInit
+          projectId={process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID ?? ''}
+        />
         <NextIntlClientProvider messages={messages}>
           <Header />
           <CalculatorsMobileBar />
