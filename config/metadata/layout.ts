@@ -23,6 +23,29 @@ export const layoutMetadata: Record<'ar' | 'en', Metadata> = {
       icon: [{ url: '/favicon.ico' }, { url: '/icon.png', type: 'image/png' }],
       apple: '/apple-icon.png',
     },
+    openGraph: {
+      title: 'غيمة العائد',
+      description:
+        'منصة مصرية مستقلة لحسابات الاستثمار — احسب عائدك ورأس مالك المطلوب بدقة تامة.',
+      url: shared.baseUrl,
+      siteName: 'غيمة العائد',
+      locale: 'ar_EG',
+      type: 'website',
+      images: [
+        {
+          url: '/opengraph-image.png',
+          width: 1200,
+          height: 630,
+        },
+      ],
+    },
+    twitter: {
+      ...shared.twitter,
+      title: 'غيمة العائد',
+      description:
+        'منصة مصرية مستقلة لحسابات الاستثمار — احسب عائدك ورأس مالك المطلوب بدقة تامة.',
+      images: ['/opengraph-image.png'],
+    },
   },
   en: {
     metadataBase: new URL(shared.baseUrl),
@@ -44,6 +67,29 @@ export const layoutMetadata: Record<'ar' | 'en', Metadata> = {
     icons: {
       icon: [{ url: '/favicon.ico' }, { url: '/icon.png', type: 'image/png' }],
       apple: '/apple-icon.png',
+    },
+    openGraph: {
+      title: 'Yield Cloud',
+      description:
+        'Independent Egyptian investment calculators — compute your yield and required capital instantly.',
+      url: shared.baseUrl,
+      siteName: 'Yield Cloud',
+      locale: 'en_US',
+      type: 'website',
+      images: [
+        {
+          url: '/opengraph-image.png',
+          width: 1200,
+          height: 630,
+        },
+      ],
+    },
+    twitter: {
+      ...shared.twitter,
+      title: 'Yield Cloud',
+      description:
+        'Independent Egyptian investment calculators — compute your yield and required capital instantly.',
+      images: ['/opengraph-image.png'],
     },
   },
 };

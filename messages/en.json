@@ -130,6 +130,12 @@
       }
     }
   },
+  "notFound": {
+    "label": "404",
+    "heading": "Page not found",
+    "body": "This page doesn't exist or has been moved.",
+    "cta": "Back to home"
+  },
   "metadata": {
     "yieldCalculator": {
       "title": "Yield Calculator | Yield Cloud",
