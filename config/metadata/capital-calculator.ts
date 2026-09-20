@@ -35,6 +35,7 @@ export const capitalCalculatorMetadata: LocaleMetadata = {
       siteName: 'غيمة العائد',
       locale: 'ar_EG',
       type: 'website',
+      images: [{ url: '/opengraph-image', width: 1200, height: 630 }],
     },
     twitter: {
       ...twitter,
@@ -75,6 +76,7 @@ export const capitalCalculatorMetadata: LocaleMetadata = {
       siteName: 'Yield Cloud',
       locale: 'en_US',
       type: 'website',
+      images: [{ url: '/opengraph-image', width: 1200, height: 630 }],
     },
     twitter: {
       ...twitter,
