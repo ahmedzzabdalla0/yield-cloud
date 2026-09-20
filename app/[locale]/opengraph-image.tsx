@@ -1,6 +1,7 @@
 import { ImageResponse } from 'next/og';
 import { routing } from '@/i18n/routing';
 import { getTranslations } from 'next-intl/server';
+import { LOGO_DATA_URL } from '@/lib/og-assets';
 
 export const runtime = 'edge';
 export const alt = 'Yield Cloud | غيمة العائد';
@@ -63,20 +64,14 @@ export default async function OpengraphImage({ params }: Props) {
 
       {/* Logo area */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-        <div
-          style={{
-            width: '56px',
-            height: '56px',
-            borderRadius: '16px',
-            background: 'rgba(255,255,255,0.15)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '28px',
-          }}
-        >
-          ☁️
-        </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={LOGO_DATA_URL}
+          width={56}
+          height={56}
+          alt=""
+          style={{ borderRadius: '14px' }}
+        />
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
           <span
             style={{

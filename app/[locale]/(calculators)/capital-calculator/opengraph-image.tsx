@@ -1,6 +1,7 @@
 import { ImageResponse } from 'next/og';
 import { routing } from '@/i18n/routing';
 import { getTranslations } from 'next-intl/server';
+import { LOGO_DATA_URL } from '@/lib/og-assets';
 
 export const runtime = 'edge';
 export const alt = 'Required Capital Calculator | Yield Cloud';
@@ -125,10 +126,18 @@ export default async function OpengraphImage({ params }: Props) {
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '8px',
+            gap: '12px',
             marginTop: '8px',
           }}
         >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={LOGO_DATA_URL}
+            width={32}
+            height={32}
+            alt=""
+            style={{ borderRadius: '8px' }}
+          />
           <span
             style={{
               fontSize: '16px',
@@ -136,9 +145,7 @@ export default async function OpengraphImage({ params }: Props) {
               color: 'rgba(255,255,255,0.5)',
             }}
           >
-            {isAr
-              ? 'غيمة العائد · yieldcloud.app'
-              : 'Yield Cloud · yieldcloud.app'}
+            {isAr ? 'غيمة العائد' : 'Yield Cloud'}
           </span>
         </div>
       </div>
