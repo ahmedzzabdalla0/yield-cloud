@@ -1,46 +1,33 @@
 import { PiggyBank } from 'lucide-react';
 import type { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
+import { NextIntlClientProvider } from 'next-intl';
+import { getLocale, getMessages, getTranslations } from 'next-intl/server';
 import { capitalCalculatorMetadata } from '@/config/metadata';
 import { shared } from '@/config/metadata/shared';
 import { CalculatorPageHeader } from '@/components/common/calculator-page-header';
 import { JsonLd } from '@/components/common/json-ld';
 import { CapitalCalculatorClient } from '@/features/calculators/capital-calculator/capital-calculator-client';
-import {
-  CAPITAL_CALC_PARAM_KEY,
-  decodeCapitalFormValues,
-} from '@/features/calculators/capital-calculator/lib';
 
-type Props = {
-  params: Promise<{ locale: string }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-};
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale } = await params;
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
   return capitalCalculatorMetadata[locale as 'ar' | 'en'];
 }
 
-export default async function CapitalCalculatorPage({
-  params,
-  searchParams,
-}: Props) {
-  const { locale } = await params;
-  const sp = await searchParams;
-  const t = await getTranslations({
-    locale,
-    namespace: 'pages.capitalCalculator',
-  });
+export default async function CapitalCalculatorPage() {
+  const locale = await getLocale();
+  const t = await getTranslations('pages.capitalCalculator');
+  const allMessages = await getMessages();
+  const messages = {
+    pages: {
+      capitalCalculator: (allMessages.pages as Record<string, unknown>)
+        .capitalCalculator,
+    },
+  };
 
   const isAr = locale === 'ar';
   const pageUrl = isAr
     ? `${shared.baseUrl}/ar/capital-calculator`
     : `${shared.baseUrl}/capital-calculator`;
-
-  const encoded = sp[CAPITAL_CALC_PARAM_KEY];
-  const initialValues = decodeCapitalFormValues(
-    typeof encoded === 'string' ? encoded : ''
-  );
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -76,7 +63,9 @@ export default async function CapitalCalculatorPage({
           headline={t('headline')}
           description={t('description')}
         />
-        <CapitalCalculatorClient initialValues={initialValues ?? undefined} />
+        <NextIntlClientProvider messages={messages}>
+          <CapitalCalculatorClient />
+        </NextIntlClientProvider>
       </div>
     </>
   );

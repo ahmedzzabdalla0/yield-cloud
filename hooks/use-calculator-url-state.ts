@@ -1,7 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-
 type Options<TValues> = {
   paramKey: string;
   encode: (values: TValues) => string;
@@ -16,21 +14,21 @@ export function useCalculatorUrlState<TValues>({
   paramKey,
   encode,
 }: Options<TValues>): CalculatorUrlState<TValues> {
-  const router = useRouter();
-
   function pushState(values: TValues) {
     const params = new URLSearchParams(window.location.search);
     params.set(paramKey, encode(values));
-    router.replace(`?${params.toString()}`, { scroll: false });
+    history.replaceState(null, '', `?${params.toString()}`);
   }
 
   function clearState() {
     const params = new URLSearchParams(window.location.search);
     params.delete(paramKey);
     const query = params.toString();
-    router.replace(query ? `?${query}` : window.location.pathname, {
-      scroll: false,
-    });
+    history.replaceState(
+      null,
+      '',
+      query ? `?${query}` : window.location.pathname
+    );
   }
 
   return { pushState, clearState };

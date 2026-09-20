@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { useSearchParams } from 'next/navigation';
 import { useCalculatorUrlState } from '@/hooks/use-calculator-url-state';
 import { CalculatorClientShell } from '@/features/calculators/shared/calculator-client-shell';
 import { CapitalCalculatorForm } from './capital-calculator-form';
@@ -8,17 +9,34 @@ import { CapitalCalculatorResult } from './capital-calculator-result';
 import {
   CAPITAL_CALC_PARAM_KEY,
   calcCapital,
+  decodeCapitalFormValues,
   encodeCapitalFormValues,
 } from './lib';
 import type { CapitalFormValues, CapitalResult } from './types';
 
-type CapitalCalculatorClientProps = {
-  initialValues?: CapitalFormValues;
-};
+function CapitalSearchParamsReader({
+  onValues,
+}: {
+  onValues: (values: CapitalFormValues) => void;
+}) {
+  const searchParams = useSearchParams();
+  const encoded = searchParams.get(CAPITAL_CALC_PARAM_KEY);
+  const called = React.useRef(false);
 
-export function CapitalCalculatorClient({
-  initialValues,
-}: CapitalCalculatorClientProps) {
+  React.useEffect(() => {
+    if (called.current || !encoded) return;
+    const values = decodeCapitalFormValues(encoded);
+    if (values) {
+      called.current = true;
+      onValues(values);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return null;
+}
+
+export function CapitalCalculatorClient() {
   const { pushState, clearState } = useCalculatorUrlState<CapitalFormValues>({
     paramKey: CAPITAL_CALC_PARAM_KEY,
     encode: encodeCapitalFormValues,
@@ -27,11 +45,14 @@ export function CapitalCalculatorClient({
   const [formKey, setFormKey] = React.useState(0);
   const [defaultValues, setDefaultValues] = React.useState<
     CapitalFormValues | undefined
-  >(initialValues);
+  >(undefined);
+  const [result, setResult] = React.useState<CapitalResult>(null);
 
-  const [result, setResult] = React.useState<CapitalResult>(() =>
-    defaultValues ? calcCapital(defaultValues) : null
-  );
+  function handleUrlValues(values: CapitalFormValues) {
+    setDefaultValues(values);
+    setResult(calcCapital(values));
+    setFormKey((k) => k + 1);
+  }
 
   function handleSubmit(values: CapitalFormValues) {
     setResult(calcCapital(values));
@@ -46,15 +67,22 @@ export function CapitalCalculatorClient({
   }
 
   return (
-    <CalculatorClientShell
-      result={<CapitalCalculatorResult result={result} onReset={handleReset} />}
-      form={
-        <CapitalCalculatorForm
-          key={formKey}
-          onSubmit={handleSubmit}
-          defaultValues={defaultValues}
-        />
-      }
-    />
+    <>
+      <React.Suspense>
+        <CapitalSearchParamsReader onValues={handleUrlValues} />
+      </React.Suspense>
+      <CalculatorClientShell
+        result={
+          <CapitalCalculatorResult result={result} onReset={handleReset} />
+        }
+        form={
+          <CapitalCalculatorForm
+            key={formKey}
+            onSubmit={handleSubmit}
+            defaultValues={defaultValues}
+          />
+        }
+      />
+    </>
   );
 }

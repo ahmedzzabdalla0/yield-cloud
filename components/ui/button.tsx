@@ -1,6 +1,6 @@
-import { Button as ButtonPrimitive } from '@base-ui/react/button';
 import { Slot } from '@radix-ui/react-slot';
 import { type VariantProps, cva } from 'class-variance-authority';
+import * as React from 'react';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
@@ -71,7 +71,7 @@ function Spinner({ className }: { className?: string }) {
   );
 }
 
-type ButtonProps = ButtonPrimitive.Props &
+type ButtonProps = React.ComponentPropsWithoutRef<'button'> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
     loading?: boolean;
@@ -87,7 +87,7 @@ function Button({
   children,
   ...props
 }: ButtonProps) {
-  const Comp = asChild ? Slot : ButtonPrimitive;
+  const Comp = asChild ? Slot : 'button';
 
   return (
     <Comp

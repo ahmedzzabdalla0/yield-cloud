@@ -1,5 +1,3 @@
-'use client';
-
 import { CalculatorTabs } from '@/components/common/calculator-tabs';
 
 export function CalculatorsMobileBar() {

@@ -1,46 +1,33 @@
 import { Wallet } from 'lucide-react';
 import type { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
+import { NextIntlClientProvider } from 'next-intl';
+import { getLocale, getMessages, getTranslations } from 'next-intl/server';
 import { yieldCalculatorMetadata } from '@/config/metadata';
 import { shared } from '@/config/metadata/shared';
 import { CalculatorPageHeader } from '@/components/common/calculator-page-header';
 import { JsonLd } from '@/components/common/json-ld';
-import {
-  YIELD_CALC_PARAM_KEY,
-  decodeYieldFormValues,
-} from '@/features/calculators/yield-calculator/lib';
 import { YieldCalculatorClient } from '@/features/calculators/yield-calculator/yield-calculator-client';
 
-type Props = {
-  params: Promise<{ locale: string }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-};
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale } = await params;
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
   return yieldCalculatorMetadata[locale as 'ar' | 'en'];
 }
 
-export default async function YieldCalculatorPage({
-  params,
-  searchParams,
-}: Props) {
-  const { locale } = await params;
-  const sp = await searchParams;
-  const t = await getTranslations({
-    locale,
-    namespace: 'pages.yieldCalculator',
-  });
+export default async function YieldCalculatorPage() {
+  const locale = await getLocale();
+  const t = await getTranslations('pages.yieldCalculator');
+  const allMessages = await getMessages();
+  const messages = {
+    pages: {
+      yieldCalculator: (allMessages.pages as Record<string, unknown>)
+        .yieldCalculator,
+    },
+  };
 
   const isAr = locale === 'ar';
   const pageUrl = isAr
     ? `${shared.baseUrl}/ar/yield-calculator`
     : `${shared.baseUrl}/yield-calculator`;
-
-  const encoded = sp[YIELD_CALC_PARAM_KEY];
-  const initialValues = decodeYieldFormValues(
-    typeof encoded === 'string' ? encoded : ''
-  );
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -76,7 +63,9 @@ export default async function YieldCalculatorPage({
           headline={t('headline')}
           description={t('description')}
         />
-        <YieldCalculatorClient initialValues={initialValues ?? undefined} />
+        <NextIntlClientProvider messages={messages}>
+          <YieldCalculatorClient />
+        </NextIntlClientProvider>
       </div>
     </>
   );

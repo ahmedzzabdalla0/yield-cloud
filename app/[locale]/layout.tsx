@@ -2,7 +2,7 @@ import { Cairo } from 'next/font/google';
 import { routing } from '@/i18n/routing';
 import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { getLocale, getMessages } from 'next-intl/server';
 import { layoutMetadata } from '@/config/metadata';
 import { cn } from '@/lib/utils';
 import { Toaster } from '@/components/ui/sonner';
@@ -18,12 +18,8 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
   return layoutMetadata[locale as 'ar' | 'en'];
 }
 
@@ -34,12 +30,12 @@ const cairo = Cairo({
 
 type Props = {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
 };
 
-export default async function RootLayout({ children, params }: Props) {
-  const { locale } = await params;
-  const messages = await getMessages();
+export default async function RootLayout({ children }: Props) {
+  const locale = await getLocale();
+  const allMessages = await getMessages();
+  const messages = { nav: allMessages.nav, notFound: allMessages.notFound };
   const dir = locale === 'ar' ? 'rtl' : 'ltr';
   return (
     <html

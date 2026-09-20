@@ -12,7 +12,6 @@
     "prepare": "is-ci || husky"
   },
   "dependencies": {
-    "@base-ui/react": "^1.8.0",
     "@microsoft/clarity": "1.0.2",
     "@radix-ui/react-radio-group": "^1.4.7",
     "@radix-ui/react-select": "^2.3.7",
@@ -22,11 +21,9 @@
     "@radix-ui/react-toggle-group": "^1.1.19",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "cn": "^0.3.0",
     "lucide-react": "^1.47.0",
     "next": "16.3.5",
     "next-intl": "^4.14.5",
-    "next-themes": "^0.4.6",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "shadcn": "^4.21.0",

@@ -1,10 +1,8 @@
 import { redirect } from '@/i18n/navigation';
+import { getLocale } from 'next-intl/server';
+import type { Locale } from '@/types/next-intl';
 
-type Props = {
-  params: Promise<{ locale: string }>;
-};
-
-export default async function RootPage({ params }: Props) {
-  const { locale } = await params;
-  redirect({ href: '/yield-calculator', locale });
+export default async function RootPage() {
+  const locale = await getLocale();
+  redirect({ href: '/yield-calculator', locale: locale as Locale });
 }

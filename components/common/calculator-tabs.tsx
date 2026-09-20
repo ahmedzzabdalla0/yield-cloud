@@ -46,8 +46,8 @@ export function CalculatorTabs({ className }: CalculatorTabsProps) {
 
   return (
     <nav className={cn('flex flex-col gap-2', className)}>
-      <div className={cn(listClassName, 'tablet:hidden w-full')} dir="auto">
-        {TABS.map(({ value, labelShort }) => {
+      <div className={cn(listClassName, 'tablet:w-auto w-full')} dir="auto">
+        {TABS.map(({ value, icon: Icon, label, labelShort }) => {
           const active = pathname === value;
           return (
             <Link
@@ -56,27 +56,9 @@ export function CalculatorTabs({ className }: CalculatorTabsProps) {
               aria-current={active ? 'page' : undefined}
               className={tabLinkClassName(active)}
             >
-              {t(labelShort)}
-            </Link>
-          );
-        })}
-      </div>
-
-      <div
-        className={cn(listClassName, 'tablet:inline-grid hidden w-auto')}
-        dir="auto"
-      >
-        {TABS.map(({ value, icon: Icon, label }) => {
-          const active = pathname === value;
-          return (
-            <Link
-              key={value}
-              href={value}
-              aria-current={active ? 'page' : undefined}
-              className={tabLinkClassName(active)}
-            >
-              {active && <Icon className="size-4" />}
-              {t(label)}
+              {active && <Icon className="tablet:block hidden size-4" />}
+              <span className="tablet:hidden">{t(labelShort)}</span>
+              <span className="tablet:inline hidden">{t(label)}</span>
             </Link>
           );
         })}

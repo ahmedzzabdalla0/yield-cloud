@@ -1,5 +1,3 @@
-'use client';
-
 import { CalculatorTabs } from '@/components/common/calculator-tabs';
 import { LocaleSwitcher } from './locale-switcher';
 import { Logo } from './logo';

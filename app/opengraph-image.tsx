@@ -1,7 +1,6 @@
 import { ImageResponse } from 'next/og';
 import { LOGO_DATA_URL } from '@/lib/og-assets';
 
-export const runtime = 'edge';
 export const alt = 'Yield Cloud | غيمة العائد';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
