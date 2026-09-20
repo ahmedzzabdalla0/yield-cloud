@@ -59,7 +59,7 @@ The reverse of the yield calculator. Enter your target return, APY, and period �
 | Language      | [TypeScript 5](https://typescriptlang.org)                                                                                     |
 | UI Library    | [React 19](https://react.dev)                                                                                                  |
 | Styling       | [Tailwind CSS v4](https://tailwindcss.com)                                                                                     |
-| Components    | [shadcn/ui](https://ui.shadcn.com) · [Radix UI](https://radix-ui.com) · [Base UI](https://base-ui.com)                         |
+| Components    | [shadcn/ui](https://ui.shadcn.com) · [Radix UI](https://radix-ui.com)                                                          |
 | Icons         | [Lucide React](https://lucide.dev)                                                                                             |
 | i18n          | [next-intl 4](https://next-intl-docs.vercel.app)                                                                               |
 | Notifications | [Sonner](https://sonner.emilkowal.ski)                                                                                         |
@@ -128,9 +128,10 @@ npm install
 cp .env.example .env.local
 ```
 
-| Variable               | Description                                          |
-| ---------------------- | ---------------------------------------------------- |
-| `NEXT_PUBLIC_BASE_URL` | Production base URL (used for canonical and OG URLs) |
+| Variable                         | Description                                          |
+| -------------------------------- | ---------------------------------------------------- |
+| `NEXT_PUBLIC_BASE_URL`           | Production base URL (used for canonical and OG URLs) |
+| `NEXT_PUBLIC_CLARITY_PROJECT_ID` | Microsoft Clarity project ID (optional analytics)    |
 
 ### Development
 
@@ -169,7 +170,13 @@ Locale prefix uses `as-needed` — English routes have no prefix, Arabic routes 
 
 ## Architecture Decisions
 
-**Shareable URL state** — On every calculation submit, `YieldFormValues` is `JSON.stringify`d, `encodeURIComponent`d, and `btoa`d into a single `?s=` query param. The client reads and validates this param on mount, pre-filling the form and computing the result immediately — no server round-trip needed.
+**Shareable URL state** — On every calculation submit, `YieldFormValues` is `JSON.stringify`d, `encodeURIComponent`d, and `btoa`d into a single `?s=` query param. URL updates use `history.replaceState` directly — no Next.js router navigation is triggered on submit, so the page stays fully static. The client reads this param on mount via `useSearchParams` inside a `Suspense` boundary, pre-filling the form and computing the result without a server round-trip.
+
+**Static calculator pages** — Calculator pages carry no `searchParams` prop, making them fully statically renderable. URL state is read entirely on the client through a `SearchParamsReader` component (renders `null`) wrapped in `React.Suspense`. The form and result shell are part of the static HTML and hydrate normally.
+
+**Scoped i18n messages** — The root layout `NextIntlClientProvider` only receives `nav` and `notFound` messages. Each calculator page wraps its client tree in its own `NextIntlClientProvider` with just that page's `pages.*` namespace — keeping the client bundle lean.
+
+**`next/root-params` locale resolution** — `i18n/request.ts` reads the current locale via `locale()` from `next/root-params` (Next.js 16.3+) instead of `requestLocale`. This provides native static rendering support without `setRequestLocale`.
 
 **Generic calculator shells** — The `shared/` folder contains three reusable shells (`CalculatorClientShell`, `CalculatorFormCard`, `CalculatorResultCard`) that handle layout, gradient styling, stats grid, share/reset footer, and clipboard copy. Each calculator only defines its domain logic (types, formula, fields) and composes these shells.
 
