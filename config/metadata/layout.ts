@@ -31,13 +31,6 @@ export const layoutMetadata: Record<'ar' | 'en', Metadata> = {
       siteName: 'غيمة العائد',
       locale: 'ar_EG',
       type: 'website',
-      images: [
-        {
-          url: '/opengraph-image.png',
-          width: 1200,
-          height: 630,
-        },
-      ],
     },
     twitter: {
       ...shared.twitter,
@@ -76,13 +69,6 @@ export const layoutMetadata: Record<'ar' | 'en', Metadata> = {
       siteName: 'Yield Cloud',
       locale: 'en_US',
       type: 'website',
-      images: [
-        {
-          url: '/opengraph-image.png',
-          width: 1200,
-          height: 630,
-        },
-      ],
     },
     twitter: {
       ...shared.twitter,
