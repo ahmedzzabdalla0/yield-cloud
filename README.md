@@ -12,7 +12,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
-[🌐 Live Demo](https://yieldcloud.ahmedabdelsalam.dev) · [👤 Portfolio](https://ahmedabdelsalam.dev)
+[🌐 Live Demo](https://yieldcloud.ahmedabdelsalam.dev) · [👤 Portfolio](https://ahmedabdelsalam.dev) · [📖 Documentation](https://ahmedabdelsalam.dev/projects/yield-cloud)
 
 </div>
 
