@@ -1,15 +1,19 @@
 import { PiggyBank } from 'lucide-react';
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-import { Suspense } from 'react';
 import { capitalCalculatorMetadata } from '@/config/metadata';
 import { shared } from '@/config/metadata/shared';
 import { CalculatorPageHeader } from '@/components/common/calculator-page-header';
 import { JsonLd } from '@/components/common/json-ld';
 import { CapitalCalculatorClient } from '@/features/calculators/capital-calculator/capital-calculator-client';
+import {
+  CAPITAL_CALC_PARAM_KEY,
+  decodeCapitalFormValues,
+} from '@/features/calculators/capital-calculator/lib';
 
 type Props = {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -17,8 +21,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return capitalCalculatorMetadata[locale as 'ar' | 'en'];
 }
 
-export default async function CapitalCalculatorPage({ params }: Props) {
+export default async function CapitalCalculatorPage({
+  params,
+  searchParams,
+}: Props) {
   const { locale } = await params;
+  const sp = await searchParams;
   const t = await getTranslations({
     locale,
     namespace: 'pages.capitalCalculator',
@@ -28,6 +36,11 @@ export default async function CapitalCalculatorPage({ params }: Props) {
   const pageUrl = isAr
     ? `${shared.baseUrl}/ar/capital-calculator`
     : `${shared.baseUrl}/capital-calculator`;
+
+  const encoded = sp[CAPITAL_CALC_PARAM_KEY];
+  const initialValues = decodeCapitalFormValues(
+    typeof encoded === 'string' ? encoded : ''
+  );
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -63,9 +76,7 @@ export default async function CapitalCalculatorPage({ params }: Props) {
           headline={t('headline')}
           description={t('description')}
         />
-        <Suspense>
-          <CapitalCalculatorClient />
-        </Suspense>
+        <CapitalCalculatorClient initialValues={initialValues ?? undefined} />
       </div>
     </>
   );

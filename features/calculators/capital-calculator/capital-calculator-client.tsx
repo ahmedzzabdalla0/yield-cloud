@@ -8,18 +8,21 @@ import { CapitalCalculatorResult } from './capital-calculator-result';
 import {
   CAPITAL_CALC_PARAM_KEY,
   calcCapital,
-  decodeCapitalFormValues,
   encodeCapitalFormValues,
 } from './lib';
 import type { CapitalFormValues, CapitalResult } from './types';
 
-export function CapitalCalculatorClient() {
-  const { initialValues, pushState, clearState } =
-    useCalculatorUrlState<CapitalFormValues>({
-      paramKey: CAPITAL_CALC_PARAM_KEY,
-      encode: encodeCapitalFormValues,
-      decode: decodeCapitalFormValues,
-    });
+type CapitalCalculatorClientProps = {
+  initialValues?: CapitalFormValues;
+};
+
+export function CapitalCalculatorClient({
+  initialValues,
+}: CapitalCalculatorClientProps) {
+  const { pushState, clearState } = useCalculatorUrlState<CapitalFormValues>({
+    paramKey: CAPITAL_CALC_PARAM_KEY,
+    encode: encodeCapitalFormValues,
+  });
 
   const [formKey, setFormKey] = React.useState(0);
   const [defaultValues, setDefaultValues] = React.useState<

@@ -3,23 +3,22 @@
 import * as React from 'react';
 import { useCalculatorUrlState } from '@/hooks/use-calculator-url-state';
 import { CalculatorClientShell } from '@/features/calculators/shared/calculator-client-shell';
-import {
-  YIELD_CALC_PARAM_KEY,
-  calcYield,
-  decodeYieldFormValues,
-  encodeYieldFormValues,
-} from './lib';
+import { YIELD_CALC_PARAM_KEY, calcYield, encodeYieldFormValues } from './lib';
 import type { YieldFormValues, YieldResult } from './types';
 import { YieldCalculatorForm } from './yield-calculator-form';
 import { YieldCalculatorResult } from './yield-calculator-result';
 
-export function YieldCalculatorClient() {
-  const { initialValues, pushState, clearState } =
-    useCalculatorUrlState<YieldFormValues>({
-      paramKey: YIELD_CALC_PARAM_KEY,
-      encode: encodeYieldFormValues,
-      decode: decodeYieldFormValues,
-    });
+type YieldCalculatorClientProps = {
+  initialValues?: YieldFormValues;
+};
+
+export function YieldCalculatorClient({
+  initialValues,
+}: YieldCalculatorClientProps) {
+  const { pushState, clearState } = useCalculatorUrlState<YieldFormValues>({
+    paramKey: YIELD_CALC_PARAM_KEY,
+    encode: encodeYieldFormValues,
+  });
 
   const [formKey, setFormKey] = React.useState(0);
   const [defaultValues, setDefaultValues] = React.useState<

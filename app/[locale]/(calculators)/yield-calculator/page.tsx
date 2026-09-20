@@ -1,15 +1,19 @@
 import { Wallet } from 'lucide-react';
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-import { Suspense } from 'react';
 import { yieldCalculatorMetadata } from '@/config/metadata';
 import { shared } from '@/config/metadata/shared';
 import { CalculatorPageHeader } from '@/components/common/calculator-page-header';
 import { JsonLd } from '@/components/common/json-ld';
+import {
+  YIELD_CALC_PARAM_KEY,
+  decodeYieldFormValues,
+} from '@/features/calculators/yield-calculator/lib';
 import { YieldCalculatorClient } from '@/features/calculators/yield-calculator/yield-calculator-client';
 
 type Props = {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -17,8 +21,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return yieldCalculatorMetadata[locale as 'ar' | 'en'];
 }
 
-export default async function YieldCalculatorPage({ params }: Props) {
+export default async function YieldCalculatorPage({
+  params,
+  searchParams,
+}: Props) {
   const { locale } = await params;
+  const sp = await searchParams;
   const t = await getTranslations({
     locale,
     namespace: 'pages.yieldCalculator',
@@ -28,6 +36,11 @@ export default async function YieldCalculatorPage({ params }: Props) {
   const pageUrl = isAr
     ? `${shared.baseUrl}/ar/yield-calculator`
     : `${shared.baseUrl}/yield-calculator`;
+
+  const encoded = sp[YIELD_CALC_PARAM_KEY];
+  const initialValues = decodeYieldFormValues(
+    typeof encoded === 'string' ? encoded : ''
+  );
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -63,9 +76,7 @@ export default async function YieldCalculatorPage({ params }: Props) {
           headline={t('headline')}
           description={t('description')}
         />
-        <Suspense>
-          <YieldCalculatorClient />
-        </Suspense>
+        <YieldCalculatorClient initialValues={initialValues ?? undefined} />
       </div>
     </>
   );
