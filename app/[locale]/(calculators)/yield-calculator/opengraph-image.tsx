@@ -29,13 +29,14 @@ export default async function OpengraphImage({ params }: Props) {
         display: 'flex',
         flexDirection: 'column',
         alignItems: isAr ? 'flex-end' : 'flex-start',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         padding: '72px 80px',
         background:
           'linear-gradient(135deg, #064e3b 0%, #065f46 50%, #047857 100%)',
         direction: isAr ? 'rtl' : 'ltr',
         position: 'relative',
         overflow: 'hidden',
+        gap: '32px',
       }}
     >
       {/* Decorative circles */}
@@ -62,7 +63,7 @@ export default async function OpengraphImage({ params }: Props) {
         }}
       />
 
-      {/* Top: badge */}
+      {/* Badge */}
       <div
         style={{
           display: 'flex',
@@ -88,12 +89,46 @@ export default async function OpengraphImage({ params }: Props) {
         </span>
       </div>
 
-      {/* Main content */}
+      {/* Logo + site name */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={LOGO_DATA_URL}
+          width={48}
+          height={48}
+          alt=""
+          style={{ borderRadius: '12px' }}
+        />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+          <span
+            style={{
+              fontSize: '20px',
+              fontWeight: 700,
+              color: '#ffffff',
+              letterSpacing: '-0.01em',
+            }}
+          >
+            {isAr ? 'غيمة العائد' : 'Yield Cloud'}
+          </span>
+          <span
+            style={{
+              fontSize: '12px',
+              fontWeight: 500,
+              color: 'rgba(255,255,255,0.5)',
+              letterSpacing: '0.12em',
+            }}
+          >
+            YIELD CLOUD
+          </span>
+        </div>
+      </div>
+
+      {/* Title + description */}
       <div
         style={{
           display: 'flex',
           flexDirection: 'column',
-          gap: '20px',
+          gap: '16px',
           maxWidth: '800px',
         }}
       >
@@ -120,34 +155,6 @@ export default async function OpengraphImage({ params }: Props) {
         >
           {t('yieldCalculator.description')}
         </p>
-
-        {/* Site label */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px',
-            marginTop: '8px',
-          }}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={LOGO_DATA_URL}
-            width={32}
-            height={32}
-            alt=""
-            style={{ borderRadius: '8px' }}
-          />
-          <span
-            style={{
-              fontSize: '16px',
-              fontWeight: 600,
-              color: 'rgba(255,255,255,0.5)',
-            }}
-          >
-            {isAr ? 'غيمة العائد' : 'Yield Cloud'}
-          </span>
-        </div>
       </div>
     </div>,
     { ...size }
