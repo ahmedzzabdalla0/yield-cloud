@@ -149,21 +149,5 @@
       "ogTitle": "Monthly Income & Financial Freedom Calculator | Yield Cloud",
       "ogDescription": "Set your target monthly income and calculate the capital required, with daily, monthly, and annual return breakdowns."
     }
-  },
-  "og": {
-    "home": {
-      "title": "Egyptian Investment Calculators",
-      "description": "Compute your yield and required capital instantly — free, fast, and built for Egypt."
-    },
-    "yieldCalculator": {
-      "badge": "Investment Return Calculator",
-      "title": "How much will you earn on your investment?",
-      "description": "Enter your principal, APY, and duration — get your full net return breakdown after tax."
-    },
-    "capitalCalculator": {
-      "badge": "Required Capital Calculator",
-      "title": "How much do you need to invest?",
-      "description": "Set your target return and we'll calculate the exact capital you need to invest."
-    }
   }
 }
