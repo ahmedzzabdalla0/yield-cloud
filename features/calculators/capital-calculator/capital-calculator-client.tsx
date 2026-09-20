@@ -1,7 +1,7 @@
 'use client';
 
-import * as React from 'react';
 import { useSearchParams } from 'next/navigation';
+import * as React from 'react';
 import { useCalculatorUrlState } from '@/hooks/use-calculator-url-state';
 import { CalculatorClientShell } from '@/features/calculators/shared/calculator-client-shell';
 import { CapitalCalculatorForm } from './capital-calculator-form';
