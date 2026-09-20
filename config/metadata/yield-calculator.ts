@@ -42,6 +42,7 @@ export const yieldCalculatorMetadata: LocaleMetadata = {
       title: 'حاسبة العائد على الاستثمار | غيمة العائد',
       description:
         'احسب عائدك على أي استثمار بعد الضريبة مع تفاصيل يومية وشهرية وسنوية.',
+      images: ['/opengraph-image'],
     },
     alternates: {
       canonical: `${baseUrl}/ar/yield-calculator`,
@@ -82,6 +83,7 @@ export const yieldCalculatorMetadata: LocaleMetadata = {
       title: 'Investment Return Calculator | Yield Cloud',
       description:
         'Calculate your net investment return after tax — daily, monthly, and yearly breakdown.',
+      images: ['/opengraph-image'],
     },
     alternates: {
       canonical: `${baseUrl}/yield-calculator`,

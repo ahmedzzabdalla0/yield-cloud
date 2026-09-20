@@ -37,6 +37,7 @@ export const layoutMetadata: Record<'ar' | 'en', Metadata> = {
       title: 'غيمة العائد',
       description:
         'منصة مصرية مستقلة لحسابات الاستثمار — احسب عائدك ورأس مالك المطلوب بدقة تامة.',
+      images: ['/opengraph-image'],
     },
   },
   en: {
@@ -74,6 +75,7 @@ export const layoutMetadata: Record<'ar' | 'en', Metadata> = {
       title: 'Yield Cloud',
       description:
         'Independent Egyptian investment calculators — compute your yield and required capital instantly.',
+      images: ['/opengraph-image'],
     },
   },
 };

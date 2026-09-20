@@ -41,6 +41,7 @@ export const capitalCalculatorMetadata: LocaleMetadata = {
       title: 'حاسبة رأس المال المطلوب | غيمة العائد',
       description:
         'احسب رأس المال اللي محتاج تستثمره عشان توصل لعائدك المستهدف.',
+      images: ['/opengraph-image'],
     },
     alternates: {
       canonical: `${baseUrl}/ar/capital-calculator`,
@@ -80,6 +81,7 @@ export const capitalCalculatorMetadata: LocaleMetadata = {
       title: 'Required Capital Calculator | Yield Cloud',
       description:
         'Calculate the exact capital needed to achieve your target investment return.',
+      images: ['/opengraph-image'],
     },
     alternates: {
       canonical: `${baseUrl}/capital-calculator`,
