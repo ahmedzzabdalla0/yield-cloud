@@ -135,19 +135,5 @@
     "heading": "Page not found",
     "body": "This page doesn't exist or has been moved.",
     "cta": "Back to home"
-  },
-  "metadata": {
-    "yieldCalculator": {
-      "title": "Yield Calculator | Yield Cloud",
-      "description": "Calculate the capital you need to live off your investment returns. Set your target monthly income and find out how much you need in a bank or investment fund.",
-      "ogTitle": "Financial Independence & Capital Calculator | Yield Cloud",
-      "ogDescription": "How much capital do you need to live off your returns? Calculate the total amount required based on your monthly income target and expected APY."
-    },
-    "capitalCalculator": {
-      "title": "Capital Calculator | Yield Cloud",
-      "description": "What monthly income are you aiming for? Calculate the required capital and full return breakdown by duration and frequency.",
-      "ogTitle": "Monthly Income & Financial Freedom Calculator | Yield Cloud",
-      "ogDescription": "Set your target monthly income and calculate the capital required, with daily, monthly, and annual return breakdowns."
-    }
   }
 }
