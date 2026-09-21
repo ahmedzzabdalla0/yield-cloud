@@ -2,8 +2,11 @@ import { Wallet } from 'lucide-react';
 import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages, getTranslations } from 'next-intl/server';
-import { yieldCalculatorMetadata } from '@/config/metadata';
-import { shared } from '@/config/metadata/shared';
+import {
+  yieldCalculatorContent,
+  yieldCalculatorMetadata,
+} from '@/config/metadata';
+import { buildWebApplicationJsonLd } from '@/lib/seo';
 import { CalculatorPageHeader } from '@/components/common/calculator-page-header';
 import { JsonLd } from '@/components/common/json-ld';
 import { YieldCalculatorClient } from '@/features/calculators/yield-calculator/yield-calculator-client';
@@ -24,34 +27,11 @@ export default async function YieldCalculatorPage() {
     },
   };
 
-  const isAr = locale === 'ar';
-  const pageUrl = isAr
-    ? `${shared.baseUrl}/ar/yield-calculator`
-    : `${shared.baseUrl}/yield-calculator`;
-
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'WebApplication',
-    name: isAr ? 'حاسبة العائد على الاستثمار' : 'Investment Return Calculator',
-    description: isAr
-      ? 'احسب عائدك على أي استثمار في ثوانٍ — أدخل رأس المال والفائدة السنوية والمدة واحصل على تفاصيل العائد بعد الضريبة.'
-      : 'Calculate your investment return in seconds. Enter principal, APY, and period to get your full net return breakdown.',
-    url: pageUrl,
-    applicationCategory: 'FinanceApplication',
-    operatingSystem: 'Any',
-    inLanguage: isAr ? 'ar-EG' : 'en-US',
-    isAccessibleForFree: true,
-    publisher: {
-      '@type': 'Organization',
-      name: 'Yield Cloud | غيمة العائد',
-      url: shared.baseUrl,
-    },
-    offers: {
-      '@type': 'Offer',
-      price: '0',
-      priceCurrency: 'EGP',
-    },
-  };
+  const jsonLd = buildWebApplicationJsonLd(
+    locale,
+    'yield-calculator',
+    yieldCalculatorContent[locale]
+  );
 
   return (
     <>

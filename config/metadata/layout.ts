@@ -1,83 +1,63 @@
 import type { Metadata } from 'next';
-import { shared } from './shared';
+import {
+  BASE_URL,
+  type Locale,
+  OG_LOCALE,
+  SITE_NAME,
+  TWITTER_HANDLE,
+  alternateOgLocales,
+  openGraphImages,
+} from '@/lib/seo';
+import { type LocaleMetadata, shared } from './shared';
 
-export const layoutMetadata: Record<'ar' | 'en', Metadata> = {
-  ar: {
-    metadataBase: new URL(shared.baseUrl),
+const descriptions: Record<Locale, string> = {
+  ar: 'منصة مصرية مستقلة لحسابات الاستثمار — احسب عائدك ورأس مالك المطلوب بدقة تامة.',
+  en: 'Independent Egyptian investment calculators — compute your yield and required capital instantly.',
+};
+
+function buildLayoutMetadata(locale: Locale): Metadata {
+  const siteName = SITE_NAME[locale];
+  const description = descriptions[locale];
+
+  return {
+    metadataBase: new URL(BASE_URL),
     title: {
-      default: 'غيمة العائد',
-      template: '%s | غيمة العائد',
+      default: siteName,
+      template: `%s | ${siteName}`,
     },
-    description:
-      'منصة مصرية مستقلة لحسابات الاستثمار — احسب عائدك ورأس مالك المطلوب بدقة تامة.',
-    applicationName: 'غيمة العائد',
+    description,
+    applicationName: shared.applicationName,
     authors: shared.authors,
     creator: shared.creator,
-    publisher: 'غيمة العائد',
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: { index: true, follow: true },
-    },
-    icons: {
-      icon: [{ url: '/favicon.ico' }, { url: '/icon.png', type: 'image/png' }],
-      apple: '/apple-icon.png',
+    publisher: siteName,
+    robots: shared.robots,
+    icons: shared.icons,
+    formatDetection: {
+      telephone: false,
+      email: false,
+      address: false,
     },
     openGraph: {
-      title: 'غيمة العائد',
-      description:
-        'منصة مصرية مستقلة لحسابات الاستثمار — احسب عائدك ورأس مالك المطلوب بدقة تامة.',
-      url: shared.baseUrl,
-      siteName: 'غيمة العائد',
-      locale: 'ar_EG',
+      title: siteName,
+      description,
+      siteName,
+      locale: OG_LOCALE[locale],
+      alternateLocale: alternateOgLocales(locale),
       type: 'website',
-      images: [{ url: '/opengraph-image', width: 1200, height: 630 }],
+      images: openGraphImages(locale),
     },
     twitter: {
-      ...shared.twitter,
-      title: 'غيمة العائد',
-      description:
-        'منصة مصرية مستقلة لحسابات الاستثمار — احسب عائدك ورأس مالك المطلوب بدقة تامة.',
+      card: 'summary_large_image',
+      site: TWITTER_HANDLE,
+      creator: TWITTER_HANDLE,
+      title: siteName,
+      description,
       images: ['/opengraph-image'],
     },
-  },
-  en: {
-    metadataBase: new URL(shared.baseUrl),
-    title: {
-      default: 'Yield Cloud',
-      template: '%s | Yield Cloud',
-    },
-    description:
-      'Independent Egyptian investment calculators — compute your yield and required capital instantly.',
-    applicationName: 'Yield Cloud',
-    authors: shared.authors,
-    creator: shared.creator,
-    publisher: 'Yield Cloud',
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: { index: true, follow: true },
-    },
-    icons: {
-      icon: [{ url: '/favicon.ico' }, { url: '/icon.png', type: 'image/png' }],
-      apple: '/apple-icon.png',
-    },
-    openGraph: {
-      title: 'Yield Cloud',
-      description:
-        'Independent Egyptian investment calculators — compute your yield and required capital instantly.',
-      url: shared.baseUrl,
-      siteName: 'Yield Cloud',
-      locale: 'en_US',
-      type: 'website',
-      images: [{ url: '/opengraph-image', width: 1200, height: 630 }],
-    },
-    twitter: {
-      ...shared.twitter,
-      title: 'Yield Cloud',
-      description:
-        'Independent Egyptian investment calculators — compute your yield and required capital instantly.',
-      images: ['/opengraph-image'],
-    },
-  },
+  };
+}
+
+export const layoutMetadata: LocaleMetadata = {
+  ar: buildLayoutMetadata('ar'),
+  en: buildLayoutMetadata('en'),
 };

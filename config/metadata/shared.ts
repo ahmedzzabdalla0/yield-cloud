@@ -1,41 +1,25 @@
-const BASE_URL =
-  process.env.NEXT_PUBLIC_BASE_URL ?? 'https://yieldcloud.ahmedabdelsalam.dev';
+import type { Metadata } from 'next';
+import { BASE_URL, type Locale } from '@/lib/seo';
+
+export type LocaleMetadata = Record<Locale, Metadata>;
 
 export const shared = {
-  baseUrl: BASE_URL,
   applicationName: 'Yield Cloud | غيمة العائد',
-  authors: [{ name: 'Yield Cloud', url: BASE_URL }],
   creator: 'Yield Cloud',
-  publisher: 'Yield Cloud',
-  keywords: {
-    ar: [
-      'غيمة العائد',
-      'حاسبة مالية',
-      'استثمار مصري',
-      'صناديق استثمار',
-      'حساب العائد',
-      'رأس المال',
-      'الهدف المالي',
-      'APY',
-      'دخل شهري',
-    ],
-    en: [
-      'Yield Cloud',
-      'financial calculator',
-      'Egypt investment',
-      'mutual funds',
-      'yield calculator',
-      'capital calculator',
-      'financial goal planner',
-      'APY',
-      'monthly income',
-    ],
+  authors: [{ name: 'Yield Cloud', url: BASE_URL }],
+  icons: {
+    icon: [{ url: '/favicon.ico' }, { url: '/icon.png', type: 'image/png' }],
+    apple: '/apple-icon.png',
   },
-  twitter: {
-    card: 'summary_large_image' as const,
-    site: '@YieldCloud',
-    creator: '@YieldCloud',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
   },
-};
-
-export type LocaleMetadata = Record<'ar' | 'en', import('next').Metadata>;
+} satisfies Metadata;
